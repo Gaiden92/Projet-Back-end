@@ -30,8 +30,7 @@ CREATE TABLE annonce (
             FOREIGN KEY (categorie_id)
             REFERENCES categorie(id_categorie)
             ON DELETE SET NULL
-
-) ENGINE=INNODB;
+)ENGINE=INNODB;
 
 CREATE TABLE photo (
     id_photo INT(3) NOT NULL AUTO_INCREMENT,
@@ -77,9 +76,7 @@ CREATE TABLE note(
         CONSTRAINT fk_membreDeux
             FOREIGN KEY(membre_id2)
             REFERENCES membre(id_membre)
-            ON DELETE SET NULL,
-
-   
+            ON DELETE SET NULL  
 ) ENGINE=INNODB;
 
 
