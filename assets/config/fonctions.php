@@ -21,21 +21,21 @@ function alertMessage(string $type, string $message) : void
  */
 
 function recupereralerteMessage() : array
-{
-    
-    $messages = $_SESSION['flash'] ?? [];
-    
-    
+{  
+    $messages = $_SESSION['flash'] ?? [];    
     unset($_SESSION['flash']);
-
     return $messages;
 }
 
+/**
+ * @return array|null
+ */
 
 function getMember() : ?array
 {
     return $_SESSION['membre'] ?? null;
 }
+
 
 /**
  * Récupérer un utilisateur par un critère
@@ -57,3 +57,18 @@ function getMemberBy(PDO $pdo, string $colonne, $valeur) : ?array
     $utilisateur = $req->fetch(PDO::FETCH_ASSOC);
     return $utilisateur ?: null;
 }
+
+/**
+ * verification du statut
+ * @param int $statut
+ * @return bool
+ */
+
+ function statut(int $statut) : bool
+ {
+     if(getMember() === null){
+         return false;
+     }
+
+     return getMember()['statut'] == $statut;
+ }
