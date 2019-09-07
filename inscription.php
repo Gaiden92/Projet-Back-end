@@ -67,11 +67,11 @@ if (isset($_POST['inscription'])) {
             'email' => $_POST['email'],
             'telephone' => $_POST['telephone'],
             'civilite' => $_POST['civilite'],
-            
-        ]);
 
+        ]);
+ 
         alertMessage('success', 'Vous avez bien été inscrit !');
-        alertMessage('info', 'Vous pouvez vous connecter.');
+        alertMessage('info', 'Vous pouvez vous connecter une fois votre activation effectué.');
         session_write_close();
        
     }
