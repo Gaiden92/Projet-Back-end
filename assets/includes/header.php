@@ -47,7 +47,7 @@ if (isset($_GET['logout'])) {
 
 
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
@@ -85,7 +85,6 @@ if (isset($_GET['logout'])) {
               <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Recherche</button>
               </form>
           <ul class="navbar-nav ml-auto">
-
               <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle mr-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Espace Membre</a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
