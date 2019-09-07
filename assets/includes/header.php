@@ -101,28 +101,8 @@ if (isset($_GET['logout'])) {
       </div>
     </nav>
 
-    <!------------------------------------------------------------------->
-    <div class="row col-12">
-      <div class="col-3">
-        <h1>SWAP</h1>
-        <p>Votre site de petites annonces en ligne</p>
-      </div>
-      <div class="offset-6 col-3">
-        <ul class="nav">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Découvrir</a>
-            </li>
 
-            <li class="nav-item">
-              <a class="nav-link" href="#">Se connecter</a>
-            </li>
-            
-            <li class="nav-item">
-              <a class="nav-link" href="#">S'inscrire</a>
-            </li>
-        </ul>
-      </div>
-    </div>
+
 
     <!-- Modal connexion -->
     <div class="modal fade" id="modalConnexion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

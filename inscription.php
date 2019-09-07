@@ -48,16 +48,15 @@ if (isset($_POST['inscription'])) {
     } elseif($_POST['password'] !== $_POST['confirmation']) {
         alertMessage('danger', 'Les mots de passe ne correspondent pas.');
 
-    } elseif($_POST['civilite'] === null){
-        alertMessage('danger', 'Veuillez indiquer votre sexe.');
-
- 
+    } elseif(empty($_POST['civilite'])){
+        alertMessage('danger', 'Veuillez indiquer votre civiltié.');
+    
 
     } else {
         
         $req = $pdo->prepare(
-            'INSERT INTO membre (pseudo, mdp, nom, prenom, statut, email, telephone, date_enregistrement)
-            VALUES (:pseudo, :mdp, :nom, :prenom, :statut, :email, :telephone, NOW())'
+            'INSERT INTO membre (pseudo, mdp, nom, prenom, statut, email, telephone, civilite, date_enregistrement)
+            VALUES (:pseudo, :mdp, :nom, :prenom, :statut, :email, :telephone, :civilite, NOW())'
         );
         $req->execute([
             'pseudo' => $_POST['pseudo'],
@@ -67,6 +66,8 @@ if (isset($_POST['inscription'])) {
             'statut' => ROLE_USER,
             'email' => $_POST['email'],
             'telephone' => $_POST['telephone'],
+            'civilite' => $_POST['civilite'],
+            
         ]);
 
         alertMessage('success', 'Vous avez bien été inscrit !');
@@ -129,8 +130,9 @@ include __DIR__ . '/assets/includes/header.php';
                 <label>Votre sexe</label>
                     <div>
                        <select name="civilite">
-                            <option name="femme" class="form-control" value="<?= $_POST['f'] ?? ''; ?>">Féminin</option>
-                            <option name="homme" class="form-control" value="<?= $_POST['m'] ?? ''; ?>">Masculin</option>
+                            <option class="form-control" value="">Choisissez une civilité</option>
+                            <option class="form-control" value="f">Féminin</option>
+                            <option class="form-control" value="m">Masculin</option>
                         </select>
                     </div> 
             </div>
