@@ -34,17 +34,20 @@
           <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Recherche</button>
           </form>
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle mr-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Espace Membre</a>
+          <li class="nav-item  dropleft ">
+              <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Espace Membre</a>
               <div class="dropdown-menu ">                 
                 <?php if (getMember() === null) : ?>      
                  <a class="dropdown-item" href="connexion.php">Connexion</a>
                   <div class="dropdown-divider"></div><a class="dropdown-item" href="inscription.php">Inscription</a>
                 <?php else: ?>
-                 <a class="dropdown-item" href="profil.php">mon profil</a>
+                 <a class="dropdown-item text-center font-weight-bold" href="profil.php">Bonjour <?=getMember()['pseudo']?> <br>Voir mon profil</a>
+                 <div class="dropdown-divider"></div>
+                 <a class="dropdown-item" href="annonce_ajout.php">ajouter une annonce</a>
                  <div class="dropdown-divider"></div>
                  <a class="dropdown-item" href="connexion.php?deconnexion">Déconnexion</a>
                     <?php if (statut(ROLE_ADMIN)) : ?>
+                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="admin/">Back-Office</a>
                     <?php endif;?>
               <?php endif; ?>
