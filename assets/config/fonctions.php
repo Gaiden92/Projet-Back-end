@@ -1,5 +1,17 @@
 <?php
+function debug($var){
+	echo '<div style="background:#' . rand(111111, 999999) . '; color: white; padding: 5px;">';
+	$trace = debug_backtrace(); // Retourne un array contenant des infos sur la ligne exécutée
+	$info = array_shift($trace); // Extrait la 1ere valeur d'un ARRAY
+	
+	echo 'Le debug a été demandé dans le fichier ' . $info['file'] .  ' à la ligne '. $info['line'] . '<hr/>'; 
+	
+	echo '<pre>'; 
+	print_r($var);
+	echo '</pre>';
 
+	echo '</div>';	
+}
 /**
  * Fonction pour ajouter un message flash
  * @param string 
@@ -72,3 +84,46 @@ function getMemberBy(PDO $pdo, string $colonne, $valeur) : ?array
 
      return getMember()['statut'] == $statut;
  }
+
+   /**
+  * récuperer les photo d'une annonce
+ * @param PDO $pdo
+ * @param mixed $id_annonce
+ * @return array|null
+  */
+ function getPhoto(PDO $pdo, $id_annonce) : array
+ {
+
+    $req = $pdo->prepare(
+        'SELECT *
+        FROM photo
+        WHERE id_photo = :photo'
+    );
+    $req->bindParam(':photo_id', $id_annonce, PDO::PARAM_INT);
+    $req->execute();
+
+
+    return $req->fetchAll(PDO::FETCH_ASSOC);
+ 
+  }
+   /**
+  * récuperer la catégorie d'une annonce
+ * @param PDO $pdo
+ * @param mixed $id_annonce
+ * @return array|null
+  */
+  function getCategorie(PDO $pdo, $id_annonce) : array
+  {
+
+    $req = $pdo->prepare(
+        'SELECT *
+        FROM categorie
+        WHERE id_categorie = :categorie_id'
+    );
+    $req->bindParam(':categorie_id', $id_annonce, PDO::PARAM_INT);
+    $req->execute();
+
+
+    return $req->fetchAll(PDO::FETCH_ASSOC);
+ 
+  }
