@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/assets/config/configurationprincipale.php';
 
+include __DIR__ . '/assets/includes/header.php';
+
 # Traitement du formulaire
 if (isset($_POST['inscription'])) {
    
@@ -80,7 +82,7 @@ if (isset($_POST['inscription'])) {
 
 
 
-include __DIR__ . '/assets/includes/header.php';
+
 ?>
 
 

@@ -72,3 +72,20 @@ function getMemberBy(PDO $pdo, string $colonne, $valeur) : ?array
 
      return getMember()['statut'] == $statut;
  }
+
+ /**
+ * Obtenir la liste des membres des plus récents aux plus anciens
+ * @param PDO $pdo
+ * @return array
+ */
+function listMembers(PDO $pdo) : array
+{
+    $req = $pdo->query(
+        'SELECT *
+        FROM membre
+        ORDER BY date_enregistrement DESC'
+    );
+
+    $members = $req->fetchAll(PDO::FETCH_ASSOC);
+    return $members;
+}
