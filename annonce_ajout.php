@@ -171,7 +171,7 @@ if(isset($_POST['enregistrer'])){
         $req3 = $pdo->prepare(
             'INSERT INTO annonce (titre, description_courte, description_longue, prix, photo, pays, ville,
             adresse, cp, membre_id, photo_id, categorie_id, date_enregistrement)
-            VALUES (:titre, :description_courte, :description_longue, :prix, :photo,: pays, :ville, :adresse, :cp, :membre_id, :photo_id, :categorie_id, :date_enregistrement)'
+            VALUES (:titre, :description_courte, :description_longue, :prix, :photo, : pays, :ville, :adresse, :cp, :membre_id, :photo_id, :categorie_id, :date_enregistrement)'
             );
             $req3->bindParam(':titre', $_POST['titre']);
             $req3->bindParam(':description_courte', $_POST['description_courte']);
