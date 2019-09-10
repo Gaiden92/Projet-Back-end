@@ -154,17 +154,17 @@ if(isset($_POST['enregistrer'])){
             }        
       
     ////////////////////////////////////////////////
-            $req2 = $pdo->prepare(
+            $req = $pdo->prepare(
                 'INSERT INTO photo (photo1, photo2, photo3, photo4, photo5)
                 VALUES (:photo1, :photo2, :photo3, :photo4, :photo5)
                 '
             );
-            $req2->bindValue(':photo1', $filename . '.' . $extension1);
-            $req2->bindValue(':photo2', $filename . '.' . $extension2);
-            $req2->bindValue(':photo3', $filename . '.' . $extension3);
-            $req2->bindValue(':photo4', $filename . '.' . $extension4);
-            $req2->bindValue(':photo5', $filename . '.' . $extension5);
-            $req2->execute();
+            $req->bindValue(':photo1', $filename . '.' . $extension1);
+            $req->bindValue(':photo2', $filename . '.' . $extension2);
+            $req->bindValue(':photo3', $filename . '.' . $extension3);
+            $req->bindValue(':photo4', $filename . '.' . $extension4);
+            $req->bindValue(':photo5', $filename . '.' . $extension5);
+            $req->execute();
         
 
         //enregistrement en bdd
@@ -188,6 +188,28 @@ if(isset($_POST['enregistrer'])){
             $req3->bindValue(':date_enregistrement', (new DateTime())->format('Y-m-d H:i:s'));
            
             $req3->execute();
+$req2 = <<<EOS
+INSERT INTO photo (photo1, photo2, photo3, photo4, photo5)
+VALUES (:photo1, :photo2, :photo3, :photo4, :photo5);
+
+INSERT INTO annonce (titre, description_courte, description_longue,prix, photo, pays, ville,adresse, cp, membre_id, date_enregistrement)
+VALUES (:titre, :description_courte, :description_longue, :prix, :photo,: pays, :ville, :adresse, :cp, :membre_id, NOW()
+JOIN  (photo ON id_photo = photo_id)
+AND (categorie ON id_categorie = . $_POST[categorie]);
+EOS;
+
+$stmt = $pdo->prepare($req2);
+            $req2->bindParam(':titre', $_POST['titre']);
+            $req2->bindParam(':description_courte', $_POST['description_courte']);
+            $req2->bindParam(':description_longue', $_POST['description_longue']);
+            $req2->bindParam(':prix',$_POST['prix'], PDO::PARAM_INT);
+            $req2->bindParam(':photo', $_POST['photo1']);
+            $req2->bindParam(':pays', $_POST['pays']);
+            $req2->bindParam(':ville', $_POST['ville']);
+            $req2->bindParam(':adresse', $_POST['adresse']);
+            $req2->bindParam(':cp', $_POST['cp'], PDO::PARAM_INT);
+           $req2->bindValue(getMember()['id'], PDO::PARAM_INT);
+            $req2->execute();
         
              //Pour vider le formulaire
             // unset($_POST);
@@ -198,9 +220,6 @@ if(isset($_POST['enregistrer'])){
 
 }
 
-//recupérer les photos
-$resultat = $pdo -> query("SELECT  * FROM photo");
-$photos = $resultat -> fetchAll();
 //affichage
 $page_title = 'ajout annonce'; 
 include __DIR__ . '/assets/includes/header.php';
