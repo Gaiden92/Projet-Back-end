@@ -84,3 +84,62 @@ function getMemberBy(PDO $pdo, string $colonne, $valeur) : ?array
 
      return getMember()['statut'] == $statut;
  }
+
+ /**
+ * Obtenir la liste des membres des plus récents aux plus anciens
+ * @param PDO $pdo
+ * @return array
+ */
+function listMembers(PDO $pdo) : array
+{
+    $req = $pdo->query(
+        'SELECT *
+        FROM membre
+        ORDER BY date_enregistrement DESC'
+    );
+
+    $members = $req->fetchAll(PDO::FETCH_ASSOC);
+    return $members;
+}
+   /**
+  * récuperer les photo d'une annonce
+ * @param PDO $pdo
+ * @param mixed $id_annonce
+ * @return array|null
+  */
+ function getPhoto(PDO $pdo, $id_annonce) : array
+ {
+
+    $req = $pdo->prepare(
+        'SELECT *
+        FROM photo
+        WHERE id_photo = :photo'
+    );
+    $req->bindParam(':photo_id', $id_annonce, PDO::PARAM_INT);
+    $req->execute();
+
+
+    return $req->fetchAll(PDO::FETCH_ASSOC);
+ 
+  }
+   /**
+  * récuperer la catégorie d'une annonce
+ * @param PDO $pdo
+ * @param mixed $id_annonce
+ * @return array|null
+  */
+  function getCategorie(PDO $pdo, $id_annonce) : array
+  {
+
+    $req = $pdo->prepare(
+        'SELECT *
+        FROM categorie
+        WHERE id_categorie = :categorie_id'
+    );
+    $req->bindParam(':categorie_id', $id_annonce, PDO::PARAM_INT);
+    $req->execute();
+
+
+    return $req->fetchAll(PDO::FETCH_ASSOC);
+ 
+  }

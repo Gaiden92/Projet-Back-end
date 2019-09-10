@@ -9,22 +9,22 @@ include __DIR__ . '/assets/includes/header.php';
 
 <!--Barre de trie-->
 <div class="container-fluid">
-<div class="row justify-content-center">
-<form>
-        <div class="form-group">
-                <div>
-                    <select>
-                        <option>Trier par prix (du moins cher au plus cher)</option>
-                        <option>Trier par prix (du plus cher au moins cher)</option>
-                        <option>Trier par date (du plus récent au plus ancien)</option>
-                        <option>Trier par date (du plus ancien au plus récent)</option>
-                        
-                        
-                    </select>
+    <div class="row justify-content-center">
+        <form>
+                <div class="form-group">
+                        <div>
+                            <select>
+                                <option>Trier par prix (du moins cher au plus cher)</option>
+                                <option>Trier par prix (du plus cher au moins cher)</option>
+                                <option>Trier par date (du plus récent au plus ancien)</option>
+                                <option>Trier par date (du plus ancien au plus récent)</option>
+                                
+                                
+                            </select>
+                        </div>
                 </div>
-        </div>
-</form>
-</div>
+        </form>
+    </div>
 
 
 
