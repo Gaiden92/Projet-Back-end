@@ -90,7 +90,7 @@
 
 
     //Préparation puis execution de la requete pour le tableau
-    $query = "SELECT * FROM membre ORDER BY id_membre ASC;";
+    $query = "SELECT * FROM membre ORDER BY membre_id ASC;";
     try {
         $req = $pdo->prepare($query);
         $req->execute();
@@ -106,7 +106,7 @@
         <table border="2" class="table">
         <thead class="thead-dark">
             <tr>
-                <th>id membre</th>
+                <th>membre id</th>
                 <th>pseudo</th>
                 <th>nom</th>
                 <th>prénom</th>
@@ -114,7 +114,7 @@
                 <th>téléphone</th>
                 <th>civilité</th>
                 <th>statut</th>
-                <th>date_enregitrement</th>
+                <th>date_enregistrement</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -126,7 +126,7 @@
             // DONNEES A AFFICHER dans chaque cellule de la ligne
     ?>
             <tr>
-                <td><?php echo $ligne['id_membre']; ?></td>
+                <td><?php echo $ligne['membre_id']; ?></td>
                 <td><?php echo $ligne['pseudo']; ?></td>
                 <td><?php echo $ligne['nom']; ?></td>
                 <td><?php echo $ligne['prenom']; ?></td>
@@ -135,8 +135,13 @@
                 <td><?php echo $ligne['civilite']; ?></td>
                 <td><?php echo $ligne['statut']; ?></td>
                 <td><?php echo $ligne['date_enregistrement']; ?></td>
-                <td><i class="fas fa-search"></i> <i class="far fa-edit"></i><button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
-                <i class="fas fa-trash-alt"></i></button></td>
+                <td>
+                <button class="btn btn-info btn-membre" data-id="<?= $ligne['membre_id'] ?>" data-toggle="modal" data-target="#membre"><i class="fa fa-eye" aria-hidden="true"></i></button>
+
+                <button class="btn btn-info btn-membre" data-id="<?= $ligne['membre_id'] ?>" data-toggle="modal" data-target="#membre_edit"><i class="far fa-edit"></i></button>
+
+                <button class="btn btn-info btn-produit" data-id="<?= $ligne['membre_id'] ?>" data-toggle="modal" data-target="#membre_suppr"><i class="far fa-trash-alt"></i></button>
+			    </td>
             </tr>
     <?php
         } // Fin condition foreach
@@ -232,28 +237,64 @@
         </form>
 
 
-    <!--Modal-->
+    <!-- Modal 1 -->
+        <div class="modal fade" id="membre" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Détail du membre</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="details">
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Suppression d'un membre</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body d-flex justify-content-center">
-         Vous êtes sur le point de supprimer un membre
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-primary">Supprimer membre</button>
-      </div>
-    </div>
-  </div>
-</div>
-    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Modal 2 -->
+        <div class="modal fade" id="membre_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modifier membre </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="details">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+                </div>
+            </div>
+        </div>
+    <!-- Modal 3 -->
+        <div class="modal fade" id="membre_suppr" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Supprimer membre</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="details">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+                </div>
+            </div>
+        </div>
 	
 <?php
     require_once __DIR__ . '/../assets/includes/footer_admin.php';

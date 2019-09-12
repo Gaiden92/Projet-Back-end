@@ -55,6 +55,7 @@ CREATE TABLE commentaire(
     id_commentaire INT(3) NOT NULL AUTO_INCREMENT,
     membre_id INT (3) NOT NULL,
     motcles TEXT,
+    date_enregistrement DATETIME,
     PRIMARY KEY (id_commentaire)
 
    
@@ -95,6 +96,7 @@ CREATE TABLE membre (
         PRIMARY KEY (id_membre)
    
 ) ENGINE=INNODB;
+
 
 
 

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="fr">
   <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
   <meta name="description" content=" ">
   <meta name="author" content="Svetlana & Samy">
