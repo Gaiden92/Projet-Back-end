@@ -31,11 +31,24 @@ $stmt = $pdo->query($query);
 $details = $stmt->fetchAll();
 
 
+//Modification 
+if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
+  $resultat = $pdo -> prepare("SELECT * FROM categorie WHERE id_categorie = :id");
+  $resultat -> bindParam(':id', $_GET['id'], PDO::PARAM_INT);
+  $resultat -> execute();
+  if ($resultat -> rowCount() > 0) {
+      $produit_a_modifier = $resultat -> fetch();
+  }
+}
+$titre = (isset($produit_a_modifier)) ? $produit_a_modifier['titre'] : '';
+$mots = (isset($produit_a_modifier)) ? $produit_a_modifier['motcles'] : '';
+
 $page_title = 'catégories'; 
 include __DIR__ . '/../assets/includes/header_admin.php';
 ?>
-<h2 class="text-center">Gestion des catégories</h2>
 
+<h2 class="text-center">Gestion des catégories</h2>
+<?php include __DIR__ . '/../assets/includes/flash.php'; ?>
 
 <!------------------------------------------------>
 <table class="table table-bordered table-striped table-hover">
@@ -52,18 +65,29 @@ include __DIR__ . '/../assets/includes/header_admin.php';
 			<td><?= $detail['titre'] ?></td>
 			<td><?= $detail['motcles'] ?></td>
 
+
+
+   
+
+
+
+
 			<td>
-                <button class="btn btn-info btn-categorie" data-id="<?= $detail['id_categorie'] ?>" data-toggle="modal" data-target="#categorie"><i class="fa fa-eye" aria-hidden="true"></i></button>
+    
 
-                <button class="btn btn-info btn-categorie" data-id="<?= $detail['id_categorie'] ?>" data-toggle="modal" data-target="#categorie_edit"><i class="far fa-edit"></i></button>
+<a class="btn btn-primary" href="fiche_categorie.php?id=<?= $detail['id_categorie'] ?>" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
+<a class="btn btn-primary" href="fiche_categorie.php?id=<?= $detail['id_categorie'] ?>" role="button"><i class="far fa-edit" aria-hidden="true"></i></a>
+<a class="btn btn-primary" href="fiche_categorie.php?id=<?= $detail['id_categorie'] ?>" role="button"><i class="far fa-trash-alt" aria-hidden="true"></i></a>
 
-                <button class="btn btn-info btn-produit" data-id="<?= $detail['id_categorie'] ?>" data-toggle="modal" data-target="#categorie_suppr"><i class="far fa-trash-alt"></i></button>
 
           
 			</td>
 		</tr>
 	<?php endforeach; ?>
 </table>
+
+
+
 <!------------------------------------>
 <div class="row  mt-4 p-4">
     <div class="col-md-6 offset-3">
@@ -72,12 +96,12 @@ include __DIR__ . '/../assets/includes/header_admin.php';
 
 				<div class="form-group">
 					<label>Titre:</label>
-					<input type="text" class="form-control" name="titre"/>
+					<input type="text" class="form-control" name="titre" />
                 </div>
                 
                 <div class="form-group">
 					<label>Mots clés :</label>
-					<textarea class="form-control" name="motcles"></textarea>
+					<textarea class="form-control" name="motcles" ></textarea>
                 </div>
 
                 <div class="form-group">
@@ -88,65 +112,6 @@ include __DIR__ . '/../assets/includes/header_admin.php';
     </div>
 </div>
 
-
-<!-- Modal 1 -->
-<div class="modal fade" id="categorie" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Détail produit</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="details">
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal 2 -->
-<div class="modal fade" id="categorie_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modifier </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="details">
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Modal 3 -->
-<div class="modal fade" id="categorie_suppr" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Supprimer</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="details">
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 <?php
