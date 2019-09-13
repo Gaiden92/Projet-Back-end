@@ -6,7 +6,7 @@ $page_title = 'Profil';
 include __DIR__ . '/../assets/includes/header_admin.php';
 ?>
 
-
+<?php include __DIR__ . '/../assets/includes/flash.php'; ?>
 
 
 
