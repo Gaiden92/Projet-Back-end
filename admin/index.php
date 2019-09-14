@@ -6,11 +6,10 @@ $page_title = 'Profil';
 include __DIR__ . '/../assets/includes/header_admin.php';
 ?>
 
-<?php include __DIR__ . '/../assets/includes/flash.php'; ?>
 
-
-
-
+<div class="col-md-6 offset-3">
+    <?php include __DIR__ . '/../assets/includes/flash.php'; ?>
+</div>
 
 
 
