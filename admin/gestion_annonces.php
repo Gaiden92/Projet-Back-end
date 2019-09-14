@@ -10,10 +10,11 @@ include __DIR__ . '/../assets/includes/header_admin.php';
 
 <?php     
 //Préparation puis execution de la requete pour le tableau
-        $query = "SELECT a.id_annonce, a.titre_annonce, a.description_courte, a.description_longue, a.prix, a.photo, a.pays, a.ville, a.cp, a.adresse, a.cp, a.date_enregistrement, m.prenom, c.titre
-        FROM annonce a, membre m, categorie c
-        WHERE a.membre_id = m.membre_id
-        And a.id_categorie = c.id_categorie";
+        $query = "SELECT a.id_annonce, a.titre, a.description_courte, a.description_longue, a.prix, a.pays, a.ville, a.cp, a.adresse, a.cp, a.date_enregistrement, m.prenom, c.titre, p.photo1
+        FROM annonce a, membre m, categorie c, photo p
+        WHERE a.membre_id = m.id_membre
+        AND a.categorie_id = c.id_categorie
+        AND a.photo_id = p.id_photo";
 
     try {
         $req = $pdo->prepare($query);
@@ -73,11 +74,11 @@ include __DIR__ . '/../assets/includes/header_admin.php';
     ?>
             <tr>
                 <td><?php echo $ligne['id_annonce']; ?></td>
-                <td><?php echo $ligne['titre_annonce']; ?></td>
+                <td><?php echo $ligne['titre']; ?></td>
                 <td><?php echo $ligne['description_courte']; ?></td>
                 <td><?php echo $ligne['description_longue']; ?></td>
                 <td><?php echo $ligne['prix']; ?></td>
-                <td><?php echo $ligne['photo']; ?></td>
+                <td><img src="assets/img/<?= $ligne['photo1']; ?>" class="card-img-top"></td>
                 <td><?php echo $ligne['pays']; ?></td>
                 <td><?php echo $ligne['ville']; ?></td>
                 <td><?php echo $ligne['adresse']; ?></td>

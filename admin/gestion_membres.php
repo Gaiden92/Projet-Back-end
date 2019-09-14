@@ -90,7 +90,7 @@
 
 
     //Préparation puis execution de la requete pour le tableau
-    $query = "SELECT * FROM membre ORDER BY membre_id ASC;";
+    $query = "SELECT * FROM membre ORDER BY id_membre ASC;";
     try {
         $req = $pdo->prepare($query);
         $req->execute();
@@ -126,7 +126,7 @@
             // DONNEES A AFFICHER dans chaque cellule de la ligne
     ?>
             <tr>
-                <td><?php echo $ligne['membre_id']; ?></td>
+                <td><?php echo $ligne['id_membre']; ?></td>
                 <td><?php echo $ligne['pseudo']; ?></td>
                 <td><?php echo $ligne['nom']; ?></td>
                 <td><?php echo $ligne['prenom']; ?></td>
@@ -136,11 +136,11 @@
                 <td><?php echo $ligne['statut']; ?></td>
                 <td><?php echo $ligne['date_enregistrement']; ?></td>
                 <td>
-                <button class="btn btn-info btn-membre" data-id="<?= $ligne['membre_id'] ?>" data-toggle="modal" data-target="#membre"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                <button class="btn btn-info btn-membre" data-id="<?= $ligne['id_membre'] ?>" data-toggle="modal" data-target="#membre"><i class="fa fa-eye" aria-hidden="true"></i></button>
 
-                <button class="btn btn-info btn-membre" data-id="<?= $ligne['membre_id'] ?>" data-toggle="modal" data-target="#membre_edit"><i class="far fa-edit"></i></button>
+                <button class="btn btn-info btn-membre" data-id="<?= $ligne['id_membre'] ?>" data-toggle="modal" data-target="#membre_edit"><i class="far fa-edit"></i></button>
 
-                <button class="btn btn-info btn-produit" data-id="<?= $ligne['membre_id'] ?>" data-toggle="modal" data-target="#membre_suppr"><i class="far fa-trash-alt"></i></button>
+                <button class="btn btn-info btn-produit" data-id="<?= $ligne['id_membre'] ?>" data-toggle="modal" data-target="#membre_suppr"><i class="far fa-trash-alt"></i></button>
 			    </td>
             </tr>
     <?php
