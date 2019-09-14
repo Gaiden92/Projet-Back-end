@@ -5,7 +5,7 @@ require_once __DIR__ . '/assets/config/configurationprincipale.php';
 debug($_POST);
 debug($_FILES);
 //recupérer les categories
-$resultat = $pdo -> query("SELECT DISTINCT * FROM categorie");
+$resultat = $pdo -> query("SELECT * FROM categorie");
 $categories = $resultat -> fetchAll();
 
 //Traitement formulaire
@@ -99,8 +99,8 @@ if(isset($_POST['enregistrer'])){
             $extension1= pathinfo($_FILES['photo1']['name'], PATHINFO_EXTENSION);
             $path = __DIR__ . '/assets/img';
             do {
-                $filename = bin2hex(random_bytes(16));
-                $complete_path = $path . '/' . $filename . '.' . $extension1;
+                $filename1 = bin2hex(random_bytes(16));
+                $complete_path = $path . '/' . $filename1 . '.' . $extension1;
             } while (file_exists($complete_path));
 
             if (!move_uploaded_file($_FILES['photo1']['tmp_name'], $complete_path)) 
@@ -111,8 +111,8 @@ if(isset($_POST['enregistrer'])){
             $extension2 = pathinfo($_FILES['photo2']['name'], PATHINFO_EXTENSION);
             $path = __DIR__ . '/assets/img';
             do {
-                $filename = bin2hex(random_bytes(16));
-                $complete_path = $path . '/' . $filename . '.' . $extension2;
+                $filename2 = bin2hex(random_bytes(16));
+                $complete_path = $path . '/' . $filename2 . '.' . $extension2;
             } while (file_exists($complete_path));
             if (!move_uploaded_file($_FILES['photo2']['tmp_name'], $complete_path)) 
             {
@@ -122,8 +122,8 @@ if(isset($_POST['enregistrer'])){
             $extension3 = pathinfo($_FILES['photo3']['name'], PATHINFO_EXTENSION);
             $path = __DIR__ . '/assets/img';
             do {
-                $filename = bin2hex(random_bytes(16));
-                $complete_path = $path . '/' . $filename . '.' . $extension3;
+                $filename3 = bin2hex(random_bytes(16));
+                $complete_path = $path . '/' . $filename3 . '.' . $extension3;
             } while (file_exists($complete_path));
             if (!move_uploaded_file($_FILES['photo3']['tmp_name'], $complete_path)) 
             {
@@ -133,8 +133,8 @@ if(isset($_POST['enregistrer'])){
             $extension4 = pathinfo($_FILES['photo4']['name'], PATHINFO_EXTENSION);
             $path = __DIR__ . '/assets/img';
             do {
-                $filename = bin2hex(random_bytes(16));
-                $complete_path = $path . '/' . $filename . '.' . $extension4;
+                $filename4 = bin2hex(random_bytes(16));
+                $complete_path = $path . '/' . $filename4 . '.' . $extension4;
             } while (file_exists($complete_path));
             if (!move_uploaded_file($_FILES['photo4']['tmp_name'], $complete_path)) 
             {
@@ -144,8 +144,8 @@ if(isset($_POST['enregistrer'])){
             $extension5 = pathinfo($_FILES['photo5']['name'], PATHINFO_EXTENSION);
             $path = __DIR__ . '/assets/img';
             do {
-                $filename = bin2hex(random_bytes(16));
-                $complete_path = $path . '/' . $filename . '.' . $extension5;
+                $filename5 = bin2hex(random_bytes(16));
+                $complete_path = $path . '/' . $filename5 . '.' . $extension5;
             } while (file_exists($complete_path));
             if (!move_uploaded_file($_FILES['photo5']['tmp_name'], $complete_path)) 
             {
@@ -160,37 +160,56 @@ if(isset($_POST['enregistrer'])){
                 VALUES (:photo1, :photo2, :photo3, :photo4, :photo5)
                 '
             );
-            $req->bindValue(':photo1', $filename . '.' . $extension1);
-            $req->bindValue(':photo2', $filename . '.' . $extension2);
-            $req->bindValue(':photo3', $filename . '.' . $extension3);
-            $req->bindValue(':photo4', $filename . '.' . $extension4);
-            $req->bindValue(':photo5', $filename . '.' . $extension5);
+            $req->bindValue(':photo1', $filename1 . '.' . $extension1);
+            $req->bindValue(':photo2', $filename2 . '.' . $extension2);
+            $req->bindValue(':photo3', $filename3 . '.' . $extension3);
+            $req->bindValue(':photo4', $filename4 . '.' . $extension4);
+            $req->bindValue(':photo5', $filename5 . '.' . $extension5);
       
             $req->execute();
-            //////////////////////////requete categorie
-            $req2 = $pdo->prepare(
-                'INSERT INTO categorie
-                SELECT categorie_id
-                FROM CATEGORIE
-                WHERE id_categorie=' . $_POST["categorie"]
+
+            // ICI ON VIENT D'AJOUTER LES PHOTOS CORRESPONDANTES A L'ANNONCE
+            // IL FAUT PILE POIL A CE MOMENT RECUPERER L'ID DE LA 'LIGNE' PHOTO
+
+            // CETTE REQUETE RECUPERE LE TOUT DERNIER ID GENERE (DU COUP CELUI DES PHOTOS)
+            // ON ENREGISTRE L'ID DANS LA VARIABLE $last_insert_id_photo (enfin libre à vous de modifier le nom ;)
+            $last_insert_id_photo = $pdo->lastInsertId();
+
+            /**
+             * 
+             * PAS BESOIN DE CREER LA CATEGORIE : ELLE EXISTE DEJA
+             * -> LE SEUL ENDROIT OU ON AJOUTE/SUPPRIME UNE CATEGORIE EST DANS LE BACKOFFICE
+             *      A LA GESTION DES CATEGORIES
+             */
+            // //////////////////////////requete categorie
+            // $req2 = $pdo->prepare(
+            //     'INSERT INTO categorie
+            //     SELECT categorie_id
+            //     FROM CATEGORIE
+            //     WHERE id_categorie=' . $_POST["categorie"]
                 
-            );
-            $req2->bindParam(':categorie', $_POST['categorie']);
-            $req2->execute();
+            // );
+            // $req2->bindParam(':categorie', $_POST['categorie']);
+            // $req2->execute();
+
+
+
+
         //requete annonce
         $req3 = $pdo->prepare(
-            'INSERT INTO annonce (titre, description_courte, description_longue, prix, pays, ville,
-            adresse, cp, membre_id,date_enregistrement)
-            VALUES (:titre, :description_courte, :description_longue, :prix, : pays, :ville, :adresse, :cp, :membre_id, :date_enregistrement)'
+            'INSERT INTO annonce (titre, description_courte, description_longue, prix, photo_id, categorie_id, pays, ville, adresse, cp, membre_id, date_enregistrement)
+            VALUES (:titre, :description_courte, :description_longue, :prix, :photo_id, :categorie_id, :pays, :ville, :adresse, :cp, :membre_id, :date_enregistrement)'
             );
             $req3->bindParam(':titre', $_POST['titre']);
             $req3->bindParam(':description_courte', $_POST['description_courte']);
             $req3->bindParam(':description_longue', $_POST['description_longue']);
             $req3->bindParam(':prix', $_POST['prix']);
+            $req3->bindParam(':photo_id', $last_insert_id_photo);
+            $req3->bindParam(':categorie_id', $_POST['categorie']);
             $req3->bindParam(':pays', $_POST['pays']);
             $req3->bindParam(':ville', $_POST['ville']);
+            $req3->bindParam(':adresse', $_POST['adresse']);
             $req3->bindParam(':cp', $_POST['cp'], PDO::PARAM_INT);
-            $req3->bindParam(':ville', $_POST['ville']);
             $req3->bindValue(':membre_id', getMember()['id_membre'], PDO::PARAM_INT);
             $req3->bindValue(':date_enregistrement', (new DateTime())->format('Y-m-d H:i:s'));
             $req3->execute();
@@ -241,7 +260,7 @@ include __DIR__ . '/assets/includes/header.php';
                     <label>Catégories:</label>
                     <select name="categorie" id=categorie  class="form-control mb-2" aria-placeholder="categories">
                         <?php foreach($categories as $cat) : ?>           
-                            <option><?= ucfirst($cat['titre']); ?></option>
+                            <option value="<?= $cat['id_categorie'] ?>"><?= ucfirst($cat['titre']); ?></option>
                         <?php endforeach;?>
                     </select>
                 </div>		

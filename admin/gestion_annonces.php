@@ -78,7 +78,7 @@ include __DIR__ . '/../assets/includes/header_admin.php';
                 <td><?php echo $ligne['description_courte']; ?></td>
                 <td><?php echo $ligne['description_longue']; ?></td>
                 <td><?php echo $ligne['prix']; ?></td>
-                <td><img src="assets/img/<?= $ligne['photo1']; ?>"></td>
+                <td><img src="../assets/img/<?= $ligne['photo1']; ?>" class="img-thumbnail"></td>
                 <td><?php echo $ligne['pays']; ?></td>
                 <td><?php echo $ligne['ville']; ?></td>
                 <td><?php echo $ligne['adresse']; ?></td>
