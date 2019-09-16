@@ -13,7 +13,7 @@ if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
     }   
     
 } else {
-        alertMessage('danger', 'erreur');
+        alertMessage('danger', 'erreur catégorie non valide / id non récupérer');
     
 }
 
@@ -73,9 +73,10 @@ if(isset($_POST['supprimer'])) {
 $page_title = 'catégorie'; 
 include __DIR__ . '/../assets/includes/header_admin.php';
 ?>
-
-<table class="table">
-	<tr>
+<!------------aff de ttes les cat-------------------------------------->
+<h2 class="text-center">Affichage de la catégorie</h2>
+<table class="table table-bordered table-striped table-hover">
+            <tr class="text-center">
 		<th>ID</th>
 		<th>titre</th>
 		<th>mots</th>
@@ -88,6 +89,7 @@ include __DIR__ . '/../assets/includes/header_admin.php';
 </table>
 
 <!------------modifier la cat-------------------------------------->
+<h2 class="text-center mt-4">Modifier de la catégorie</h2>
 <div class="col-md-6 offset-3">
     <?php include __DIR__ . '/../assets/includes/flash.php'; ?>
 
@@ -103,7 +105,10 @@ include __DIR__ . '/../assets/includes/header_admin.php';
         </div>   
         <input type="submit" class="btn btn-success" value="modifier" name="modifier"/>            
     </form>  
+
+
 <!---------------suppr la cat----------->
+<h2 class="text-center mt-4">Supprimer la catégorie</h2>
     <form  method="post" action="fiche_categorie.php?id=<?=$id_categorie?>" enctype="multipart/form-data">
         <input type="hidden" name="id_categorie" value="<?= $id_categorie ?>"/>
             <div class="form-group form-check " >
@@ -113,9 +118,12 @@ include __DIR__ . '/../assets/includes/header_admin.php';
         <input type="submit" class="btn btn-danger" name='supprimer' value="supprimer"/>
     
     </form>
+
+    
 </div>
 
 
 <?php
-debug($_POST);
+//debug($_POST);
 include __DIR__ . '/../assets/includes/footer_admin.php';
+?>
