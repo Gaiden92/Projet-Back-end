@@ -9,7 +9,7 @@
 
 <?php //Traitement du formulaire
 
-    if (isset($_POST['enregistrement'])) {
+    if (isset($_POST['enregistrer'])) {
         //Si le pseudo existe déja
         if (getMemberBy($pdo, 'pseudo', $_POST['pseudo']) !== null) {
             alertMessage('danger', 'Ce pseudo est déjà pris.');
@@ -79,9 +79,8 @@
                 'civilite' => $_POST['civilite'],
     
             ]);
-     
-            alertMessage('success', 'Vous avez bien été inscrit !');
-            alertMessage('info', 'Vous pouvez vous connecter une fois votre activation effectué.');
+            unset($_POST);
+            alertMessage('success', 'Vous avez inscrit un nouveau membre !');
             session_write_close();
         }
     }
@@ -135,13 +134,11 @@
                 <td><?php echo $ligne['civilite']; ?></td>
                 <td><?php echo $ligne['statut']; ?></td>
                 <td><?php echo $ligne['date_enregistrement']; ?></td>
-                <td>
-                <button class="btn btn-info btn-membre" data-id="<?= $ligne['id_membre'] ?>" data-toggle="modal" data-target="#membre"><i class="fa fa-eye" aria-hidden="true"></i></button>
-
-                <button class="btn btn-info btn-membre" data-id="<?= $ligne['id_membre'] ?>" data-toggle="modal" data-target="#membre_edit"><i class="far fa-edit"></i></button>
-
-                <button class="btn btn-info btn-produit" data-id="<?= $ligne['id_membre'] ?>" data-toggle="modal" data-target="#membre_suppr"><i class="far fa-trash-alt"></i></button>
-			    </td>
+                <td><a class="btn btn-primary" href="fiche_membre.php?id=<?= $ligne['id_membre'] ?>" role="button"><i        class="fa fa-eye" aria-hidden="true"></i></a>
+                    <a class="btn btn-primary" href="fiche_membre.php?id=<?= $ligne['id_membre'] ?>" role="button"><i class="far fa-edit" aria-hidden="true"></i></a>
+                    <a class="btn btn-primary" href="fiche_membre.php?id=<?= $ligne['id_membre'] ?>" role="button"><i class="far fa-trash-alt" aria-hidden="true"></i></a>        
+                    </td>
+			    
             </tr>
     <?php
         } // Fin condition foreach
@@ -231,8 +228,12 @@
                         <option value="0">Membre</option>
                     </select>
                 </div>
+            <div class="form-group center-block">
+				<input type="submit" class="btn btn-success" name="enregistrer" value="Enregistrer" />
+            </div>
                 
     </div>
+  
         
         </form>
 
@@ -248,7 +249,7 @@
                     </button>
                 </div>
                 <div class="modal-body" id="details">
-
+                
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>

@@ -10,7 +10,7 @@ include __DIR__ . '/../assets/includes/header_admin.php';
 
 <?php     
 //Préparation puis execution de la requete pour le tableau
-        $query = "SELECT a.id_annonce, a.titre, a.description_courte, a.description_longue, a.prix, a.pays, a.ville, a.cp, a.adresse, a.cp, a.date_enregistrement, m.prenom, c.titre, p.photo1
+        $query = "SELECT a.id_annonce, a.titreA, a.description_courte, a.description_longue, a.prix, a.pays, a.ville, a.cp, a.adresse, a.cp, a.date_enregistrement, m.prenom, c.titre, p.photo1
         FROM annonce a, membre m, categorie c, photo p
         WHERE a.membre_id = m.id_membre
         AND a.categorie_id = c.id_categorie
@@ -74,7 +74,7 @@ include __DIR__ . '/../assets/includes/header_admin.php';
     ?>
             <tr>
                 <td><?php echo $ligne['id_annonce']; ?></td>
-                <td><?php echo $ligne['titre']; ?></td>
+                <td><?php echo $ligne['titreA']; ?></td>
                 <td><?php echo $ligne['description_courte']; ?></td>
                 <td><?php echo $ligne['description_longue']; ?></td>
                 <td><?php echo $ligne['prix']; ?></td>

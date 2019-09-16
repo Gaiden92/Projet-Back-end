@@ -12,7 +12,7 @@ $categories = $resultat -> fetchAll();
 if(isset($_POST['enregistrer'])){
 
     //verif titre
-    if (empty($_POST['titre']) || strlen($_POST['titre']) > 255) 
+    if (empty($_POST['titreA']) || strlen($_POST['titreA']) > 255) 
     {
         alertMessage('danger', 'Le titre doit contenir entre 1 et 255 caractères.');
 
@@ -51,10 +51,7 @@ if(isset($_POST['enregistrer'])){
         {
             alertMessage('danger', 'Le code postal  ne doit contenir que 5 chiffres. ');
 
-        //categorie
-        }elseif(empty($_POST['titre']) || strlen($_POST['titre']) > 255) 
-        {
-            alertMessage('danger', 'Le titre doit contenir entre 1 et 255 caractères.');
+      
 
 
 ///////////////////////////////////////////////////////////////
@@ -197,10 +194,10 @@ if(isset($_POST['enregistrer'])){
 
         //requete annonce
         $req3 = $pdo->prepare(
-            'INSERT INTO annonce (titre, description_courte, description_longue, prix, photo_id, categorie_id, pays, ville, adresse, cp, membre_id, date_enregistrement)
-            VALUES (:titre, :description_courte, :description_longue, :prix, :photo_id, :categorie_id, :pays, :ville, :adresse, :cp, :membre_id, :date_enregistrement)'
+            'INSERT INTO annonce (titreA, description_courte, description_longue, prix, photo_id, categorie_id, pays, ville, adresse, cp, membre_id, date_enregistrement)
+            VALUES (:titreA, :description_courte, :description_longue, :prix, :photo_id, :categorie_id, :pays, :ville, :adresse, :cp, :membre_id, :date_enregistrement)'
             );
-            $req3->bindParam(':titre', $_POST['titre']);
+            $req3->bindParam(':titreA', $_POST['titreA']);
             $req3->bindParam(':description_courte', $_POST['description_courte']);
             $req3->bindParam(':description_longue', $_POST['description_longue']);
             $req3->bindParam(':prix', $_POST['prix']);
@@ -214,8 +211,8 @@ if(isset($_POST['enregistrer'])){
             $req3->bindValue(':date_enregistrement', (new DateTime())->format('Y-m-d H:i:s'));
             $req3->execute();
              //Pour vider le formulaire
-            // unset($_POST);
-            // alertMessage('success', 'Votre annonce a été enregistrer!');
+            unset($_POST);
+            alertMessage('success', 'Votre annonce a été enregistrer!');
     
    
     }  
@@ -238,7 +235,7 @@ include __DIR__ . '/assets/includes/header.php';
 
 				<div class="form-group">
 					<label>Titre:</label>
-					<input type="text" class="form-control" name="titre" value="" />
+					<input type="text" class="form-control" name="titreA" value="" />
                 </div>
                 
                 <div class="form-group">
