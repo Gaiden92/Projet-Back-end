@@ -74,7 +74,7 @@ if (isset($_POST['inscription'])) {
         ]);
  
         alertMessage('success', 'Vous avez bien été inscrit !');
-        alertMessage('info', 'Vous pouvez vous connecter une fois votre activation effectué.');
+        //alertMessage('info', 'Vous pouvez vous connecter une fois votre activation effectué.');
         session_write_close();
        
     }

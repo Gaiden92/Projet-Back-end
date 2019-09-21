@@ -41,7 +41,7 @@ include __DIR__ . '/../assets/includes/header_admin.php';
                 <td><?=$ligne['titreA']; ?></td>
                 <td><?=$ligne['description_courte']; ?></td>
                 <td><?=$ligne['description_longue']; ?></td>
-                <td><?=number_format($ligne['prix'], 2, ',', ' ');?></td>
+                <td><?=number_format($ligne['prix'], 2, ',', ' ');?>€</td>
 
                 <td><img src="../assets/img/<?= $ligne['photo1']; ?>" class="img-thumbnail"></td>
 

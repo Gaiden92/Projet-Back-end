@@ -77,17 +77,17 @@ if (isset($_POST['enregistrer']) || isset($_POST['modifier'])) {
     } else{
         if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
             //photo1
-            if ($_FILES['photo1']['error'] === UPLOAD_ERR_OK) {
+            if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
                 $extension1 = pathinfo($_FILES['photo1']['name'], PATHINFO_EXTENSION);
                 $path = __DIR__ . '/assets/img';
 
                 do {
-                    $filename = bin2hex(random_bytes(16));
-                    $complete_path = $path . '/' . $filename . '.' . $extension1;
+                    $filename1 = bin2hex(random_bytes(16));
+                    $complete_path = $path . '/' . $filename1 . '.' . $extension1;
                 } while (file_exists($complete_path));
 
                 $upload = move_uploaded_file($_FILES['photo1']['tmp_name'], $complete_path);
-                $new_file1 = $filename . '.' . $extension1;
+                $new_file1 = $filename1 . '.' . $extension1;
                 // Si okon supprime l'ancienne
                 if ($upload) {
                     unlink(__DIR__ . '/assets/img/' . $photo1);
@@ -100,17 +100,17 @@ if (isset($_POST['enregistrer']) || isset($_POST['modifier'])) {
             }*/
 
             //photo2
-            elseif ($_FILES['photo2']['error'] === UPLOAD_ERR_OK) {
+            elseif ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
                 $extension2 = pathinfo($_FILES['photo2']['name'], PATHINFO_EXTENSION);
                 $path = __DIR__ . '/assets/img';
 
                 do {
-                    $filename = bin2hex(random_bytes(16));
-                    $complete_path = $path . '/' . $filename . '.' . $extension2;
+                    $filename2 = bin2hex(random_bytes(16));
+                    $complete_path = $path . '/' . $filename2 . '.' . $extension2;
                 } while (file_exists($complete_path));
 
                 $upload = move_uploaded_file($_FILES['photo2']['tmp_name'], $complete_path);
-                $new_file2 = $filename . '.' . $extension2;
+                $new_file2 = $filename2 . '.' . $extension2;
                 // Si la nouvelle image est enregistrée, on supprime l'ancienne
                 if ($upload) {
                     unlink(__DIR__ . '/assets/img/' . $photo2);
@@ -123,17 +123,17 @@ if (isset($_POST['enregistrer']) || isset($_POST['modifier'])) {
             }*/
 
             //photo3
-            elseif ($_FILES['photo3']['error'] === UPLOAD_ERR_OK) {
+            elseif ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
                 $extension3 = pathinfo($_FILES['photo3']['name'], PATHINFO_EXTENSION);
                 $path = __DIR__ . '/assets/img';
 
                 do {
-                    $filename = bin2hex(random_bytes(16));
-                    $complete_path = $path . '/' . $filename . '.' . $extension3;
+                    $filename3 = bin2hex(random_bytes(16));
+                    $complete_path = $path . '/' . $filename3 . '.' . $extension3;
                 } while (file_exists($complete_path));
 
                 $upload = move_uploaded_file($_FILES['photo3']['tmp_name'], $complete_path);
-                $new_file3 = $filename . '.' . $extension3;
+                $new_file3 = $filename3 . '.' . $extension3;
                 // Si la nouvelle image est enregistrée, on supprime l'ancienne
                 if ($upload) {
                     unlink(__DIR__ . '/assets/img/' . $photo3);
@@ -146,17 +146,17 @@ if (isset($_POST['enregistrer']) || isset($_POST['modifier'])) {
             }*/
 
             //photo4
-            elseif ($_FILES['photo4']['error'] === UPLOAD_ERR_OK) {
+            elseif ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
                 $extension4 = pathinfo($_FILES['photo4']['name'], PATHINFO_EXTENSION);
                 $path = __DIR__ . '/assets/img';
 
                 do {
-                    $filename = bin2hex(random_bytes(16));
-                    $complete_path = $path . '/' . $filename . '.' . $extension4;
+                    $filename4 = bin2hex(random_bytes(16));
+                    $complete_path = $path . '/' . $filename4 . '.' . $extension4;
                 } while (file_exists($complete_path));
 
                 $upload = move_uploaded_file($_FILES['photo4']['tmp_name'], $complete_path);
-                $new_file4 = $filename . '.' . $extension4;
+                $new_file4 = $filename4 . '.' . $extension4;
                 // Si la nouvelle image est enregistrée, on supprime l'ancienne
                 if ($upload) {
                     unlink(__DIR__ . '/assets/img/' . $photo4);
@@ -169,17 +169,17 @@ if (isset($_POST['enregistrer']) || isset($_POST['modifier'])) {
             }*/
 
             //photo5
-            elseif ($_FILES['photo5']['error'] === UPLOAD_ERR_OK) {
+            elseif ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
                 $extension5 = pathinfo($_FILES['photo5']['name'], PATHINFO_EXTENSION);
                 $path = __DIR__ . '/assets/img';
 
                 do {
-                    $filename = bin2hex(random_bytes(16));
-                    $complete_path = $path . '/' . $filename . '.' . $extension5;
+                    $filename5 = bin2hex(random_bytes(16));
+                    $complete_path = $path . '/' . $filename5 . '.' . $extension5;
                 } while (file_exists($complete_path));
 
                 $upload = move_uploaded_file($_FILES['photo5']['tmp_name'], $complete_path);
-                $new_file5 = $filename . '.' . $extension5;
+                $new_file5 = $filename5 . '.' . $extension5;
                 // Si la nouvelle image est enregistrée, on supprime l'ancienne
                 if ($upload) {
                     unlink(__DIR__ . '/assets/img/' . $photo5);
@@ -194,8 +194,7 @@ if (isset($_POST['enregistrer']) || isset($_POST['modifier'])) {
             //enregistrement modif en bdd
             ////////////////////requete photo
             $req = $pdo->prepare(
-                'UPDATE photo set 
-                id_photo = :id_photo
+                'UPDATE photo set            
                 photo1 = :photo1, 
                 photo2 = :photo2, 
                 photo3= :photo3, 
@@ -212,12 +211,13 @@ if (isset($_POST['enregistrer']) || isset($_POST['modifier'])) {
             $req->bindValue(':photo5',  $new_file5 . '.' . $extension5);
     
             $req->execute();
+            $last_insert_id_photo = $pdo->lastInsertId();
             //requete annonce
     
-            $req3 = $pdo->prepare(
+            $req2 = $pdo->prepare(
                 'UPDATE annonce
                 SET     
-                    id_annonce =:id
+             
                     titreA = :titreA, 
                     description_courte = :description_courte, 
                     description_longue = :description_longue, 
@@ -231,26 +231,27 @@ if (isset($_POST['enregistrer']) || isset($_POST['modifier'])) {
                     membre_id = :membre_id, 
                     date_enregistrement = :date_enregistrement
    
-             WHERE id_annonce =:id
+                    WHERE a.id_annonce =:id
+            AND membre_id = :id
+            AND categorie_id = categorie_id
+            AND photo_id = photo_id
 
         ');
 
-            $req3->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
-            $req3->bindParam(':titreA', $_POST['titreA']);
-            $req3->bindParam(':description_courte', $_POST['description_courte']);
-            $req3->bindParam(':description_longue', $_POST['description_longue']);
-            $req3->bindParam(':prix', $_POST['prix']);
-         
-            $req3->bindParam(':photo_id', $_POST['photoID'], PDO::PARAM_INT);
-
-            $req3->bindParam(':categorie_id', $_POST['categorieID'], PDO::PARAM_INT);
-            $req3->bindParam(':pays', $_POST['pays']);
-            $req3->bindParam(':ville', $_POST['ville']);
-            $req3->bindParam(':adresse', $_POST['adresse']);
-            $req3->bindParam(':cp', $_POST['cp'], PDO::PARAM_INT);
-            $req3->bindValue(':membre_id', getMember()['id_membre'], PDO::PARAM_INT);
-            $req3->bindValue(':date_enregistrement', (new DateTime())->format('Y-m-d H:i:s'));
-            $req3->execute();
+            $req2->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
+            $req2->bindParam(':titreA', $_POST['titreA']);
+            $req2->bindParam(':description_courte', $_POST['description_courte']);
+            $req2->bindParam(':description_longue', $_POST['description_longue']);
+            $req2->bindParam(':prix', $_POST['prix']);
+            $req2->bindParam(':photo_id', $last_insert_id_photo);
+            $req2->bindParam(':categorie_id', $_POST['categorie']);
+            $req2->bindParam(':pays', $_POST['pays']);
+            $req2->bindParam(':ville', $_POST['ville']);
+            $req2->bindParam(':adresse', $_POST['adresse']);
+            $req2->bindParam(':cp', $_POST['cp'], PDO::PARAM_INT);
+            $req2->bindValue(':membre_id', getMember()['id_membre'], PDO::PARAM_INT);
+            $req2->bindValue(':date_enregistrement', (new DateTime())->format('Y-m-d H:i:s'));
+            $req2->execute();
             //Pour vider le formulaire
             //unset($_POST);
             alertMessage('success', 'Les modifications de votre annonces ont bien été enregistrées!');
