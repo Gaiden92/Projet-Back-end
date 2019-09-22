@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../assets/config/configurationprincipale.php';
 
-// fiche_categorie.php?id=
+// fiche_annonce.php?id=
 if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
     $resultat = $pdo -> prepare("SELECT a.id_annonce, a.titreA, a.description_courte, a.description_longue, a.prix, a.pays, a.ville, a.cp, a.adresse, a.cp, a.date_enregistrement, m.prenom, c.titre, p.photo1, p.photo2, p.photo3, p.photo4, p.photo5
     FROM annonce a, membre m, categorie c, photo p

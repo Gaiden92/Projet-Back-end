@@ -15,7 +15,7 @@ include __DIR__ . '/../assets/includes/header_admin.php';
 ?>
 <h2 class="text-center mt-5 mb-5">Gestion des annonces</h2>
 <?php include __DIR__ . '/../assets/includes/flash.php'; ?>
-        <table border="2" class="table table-bordered table-striped table-hover">
+        <table border="2" class=" table table-bordered table-striped table-hover">
         <thead class="thead-dark text-center">
             <tr>
                 <th>id annonce</th>
@@ -41,7 +41,7 @@ include __DIR__ . '/../assets/includes/header_admin.php';
                 <td><?=$ligne['titreA']; ?></td>
                 <td><?=$ligne['description_courte']; ?></td>
                 <td><?=$ligne['description_longue']; ?></td>
-                <td><?=number_format($ligne['prix'], 2, ',', ' ');?></td>
+                <td><?=number_format($ligne['prix'], 2, ',', ' ');?>€</td>
 
                 <td><img src="../assets/img/<?= $ligne['photo1']; ?>" class="img-thumbnail"></td>
 
