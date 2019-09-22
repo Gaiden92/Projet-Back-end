@@ -22,19 +22,7 @@ if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
 //enregistrement modification
 if(isset($_POST['modifier'])){
     //verif pseudo
-    if (getMemberBy($pdo, 'pseudo', $_POST['pseudo']) !== null) {
-        alertMessage('danger', 'Ce pseudo est déjà pris.');
-
-    //si le pseudo est est inférieur à 3 ou et supérieur à 25 caractéres 
-    } elseif(strlen($_POST['pseudo']) < 3 || strlen($_POST['pseudo']) > 25) {
-        alertMessage('danger', 'Le pseudo doit contenir entre 3 et 25 caractères.');
-
-    //si le pseudo contient des caractéres interdit
-    } elseif(!preg_match('~^[a-zA-Z0-9_-]+$~', $_POST['pseudo'])) {
-        alertMessage('danger', 'Le pseudo contient des caractères non-autorisés.');
-
-    //si la case "nom" est vide
-    } elseif(empty($_POST['nom'])) {
+    if(empty($_POST['nom'])) {
         alertMessage('danger', 'Veuillez indiquer un nom.');
 
     //si le nom contient des chiffres ou des caractéres spéciaux interdit
@@ -48,14 +36,6 @@ if(isset($_POST['modifier'])){
     //si le prénom contient des caractéres spéciaux interdit 
     } elseif(!preg_match('~^[a-zA-Z]+$~', $_POST['prenom'])) {
         alertMessage('danger', 'Le prénom contient des caractères non-autorisés.');
-
-    //si le mail est vide
-    } elseif(empty($_POST['email'])) {
-        alertMessage('danger', 'Veuillez indiquer un email.');
-    //si le mail est non valide 
-
-    } elseif(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-        alertMessage('danger', 'Veuillez indiquer une adresse email valide.');
     
     //si la case téléphone est vide
     } elseif(empty($_POST['telephone'])) {
@@ -70,22 +50,19 @@ if(isset($_POST['modifier'])){
     {
       
             
-      $pseudo= $_POST['pseudo'];
+      
 
         $resultat = $pdo->prepare(
             'UPDATE membre 
-            SET id_membre=:id, pseudo=:pseudo, nom=:nom, prenom=:prenom, email= :email, telephone= :telephone, civilite= :civilite, statut= :statut
-            WHERE id_membre=:id'
+            SET id_membre=:id, prenom=:prenom, nom=:nom, telephone=:telephone, civilite=:civilite, statut=:statut
+            WHERE id_membre=:id '
         );
             $resultat->bindParam(':id', $_POST['id_membre'], PDO::PARAM_INT);
-            $resultat->bindParam(':pseudo', $_POST['pseudo']);
-            $resultat->bindParam(':nom', $_POST['nom']);
             $resultat->bindParam(':prenom', $_POST['prenom']);
-            $resultat->bindParam(':email', $_POST['email']);
+            $resultat->bindParam(':nom', $_POST['nom']);
             $resultat->bindParam(':telephone', $_POST['telephone']);
             $resultat->bindParam(':civilite', $_POST['civilite']);
             $resultat->bindParam(':statut', $_POST['statut']);
-
             $resultat->execute();             
             alertMessage('success', 'La modification a été enregistré');
             session_commit();
@@ -101,6 +78,7 @@ if(isset($_POST['modifier'])){
             $membre_a_modifier = $resultat -> fetch();           
         }
     }
+    $id_membre = (isset($membre_a_modifier)) ? $membre_a_modifier['id_membre'] : '';
     $pseudo = (isset($membre_a_modifier)) ? $membre_a_modifier['pseudo'] : '';
     $nom = (isset($membre_a_modifier)) ? $membre_a_modifier['nom'] : '';
     $prenom = (isset($membre_a_modifier)) ? $membre_a_modifier['prenom'] : '';
@@ -156,11 +134,11 @@ include __DIR__ . '/../assets/includes/header_admin.php';
     <?php include __DIR__ . '/../assets/includes/flash.php'; ?>
 
     <form action="fiche_membre.php?id=<?= $_GET['id']; ?>" method="post" enctype="multipart/form-data" >
-        <input type="hidden" name="id_membre" value="<?=$id_membre?>"/>
+    <input type="hidden" name="id_membre" value="<?=$id_membre?>"/>
 
             <div class="form-group">
                 <label>Pseudo:</label>
-                <input type="text" class="form-control" name="pseudo" value="<?= $pseudo?>"/>
+                <input type="text" disabled class="form-control" name="pseudo" value="<?=$pseudo?>"/>
             </div> 
 
             <div class="form-group">
@@ -175,12 +153,12 @@ include __DIR__ . '/../assets/includes/header_admin.php';
 
             <div class="form-group">
                 <label>Email:</label>
-                <input type="text" value="<?=$email?>" class="form-control" type="email" name="email">
+                <input type="email" value="<?=$email?>" disabled class="form-control" type="email" name="email">
             </div>
 
             <div class="form-group">
                 <label>Téléphone:</label>
-                <input type="text" class="form-control" value="<?=$telephone?>" name="telephone">
+                <input type="tel" class="form-control" value="<?=$telephone?>" name="telephone">
             </div>
 
             <div class="input-group mb-3">
