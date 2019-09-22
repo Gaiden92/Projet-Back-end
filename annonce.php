@@ -8,6 +8,7 @@ if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
     WHERE a.id_annonce =:id
     AND a.categorie_id = c.id_categorie
     AND a.photo_id = p.id_photo
+   
 ");
     $resultat -> bindParam(':id', $_GET['id'], PDO::PARAM_INT);
     $resultat -> execute();
@@ -22,8 +23,18 @@ if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
     
 }
 
+// recupérer les suggestions de produit : 
 
+$query = "SELECT a.id_annonce, a.titreA, a.description_courte, a.description_longue, a.prix, a.pays, a.ville, a.cp, a.adresse, a.cp, a.date_enregistrement, m.prenom, c.titre, p.photo1
+FROM annonce a, membre m, categorie c, photo p
+WHERE (a.membre_id = m.id_membre)
+AND (a.categorie_id = c.id_categorie)
+AND (a.photo_id = p.id_photo)
+ORDER BY prix LIMIT 0,4";
 
+$stmt = $pdo->query($query);
+$suggestions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+extract($suggestions);
 
 $page_title = 'Accueil'; 
 include __DIR__ . '/assets/includes/header.php';
@@ -33,7 +44,7 @@ include __DIR__ . '/assets/includes/header.php';
   <?php include __DIR__ . '/assets/includes/flash.php'; ?>
 
   <div class="container-fluid annonce d-flex flex-row flex-wrap">
-    <div class="photo col-4">
+    <div class="photo col-5">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -63,13 +74,15 @@ include __DIR__ . '/assets/includes/header.php';
         </div>
     </div>
 
-    <div class="col-8">
+    <div class="col-7">
         <h5>Descritpion :</h5>
         <p class="card-text" style="text-align: justify;"><?= nl2br(htmlspecialchars($annonce['description_longue']))?></p>              
     </div>
 
     <div class="col d-flex justify-content-between">
-        <p><i class="far fa-calendar-alt"></i> Dâte de publication : <?=$annonce['date_enregistrement'];?></p>
+        <p><i class="far fa-calendar-alt"></i> Dâte de publication : <?= (new DateTime($annonce['date_enregistrement']))->format('d/m/Y'); ?></p>
+
+
         <p><i class="far fa-user"></i> avis</p>
         <p><i class="fas fa-euro-sign"></i> <?=number_format($annonce['prix'], 2, ',', ' ');?>€</p>
         <p><i class="fas fa-map-marker-alt"></i> Adresse : <?=$annonce['adresse'];?></p>
@@ -77,27 +90,27 @@ include __DIR__ . '/assets/includes/header.php';
 
   </div>
 
-  <div class="container localisation">
+  <div class="container-fluid localisation mb-4">
     <iframe width="100%" height="350" src="http://maps.google.fr/maps?q=<?=$annonce['adresse'];?>&amp;t=h&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" ></iframe>
   </div>
 
-  <div class="container autresAnnonces">
-      <p>Autres annonces</p>
+  <p class="text-center">Voir des autres annonces :</p>
+  <hr>
+  <div class="container-fluid autresAnnonces  d-flex flex-row justify-content-between">
+    <?php foreach($suggestions as $sug) : ?>
+        <div class="card m-4" style="width: 18rem; ">
+            <img src="assets/img/<?=$sug['photo1']?>" class="card-img-top" alt="..."> 
+            <a href="annonce.php?id=<?= $sug['id_annonce'] ?>" class="stretched-link"></a> 
+        </div>
+    <?php endforeach; ?>
+  </div>
+  <hr>
+  <div class="container-fluid d-flex flex-row justify-content-between">
+      <a href="#" class="text-decoration-none bg-light" style="color:black;">deposer un commentaire ou une note</a>
+     <a href="index.php" class="text-decoration-none bg-light" style="color:black;">Retour vers les annonces</a>
   </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <hr>
 
 
 
