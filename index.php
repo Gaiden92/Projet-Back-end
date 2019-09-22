@@ -78,17 +78,21 @@ include __DIR__ . '/assets/includes/header.php';
             </div>
           </form>
 
-     
-
-
 
       </section>
-      
+  
+   
       <div class="col-8 annonces" id="detail" >
+            <select name="" id="" class="form-control mb-2">     
+                <option value="">trier par prix du moins cher au plus cher</option>
+                <option value="">trier par prix du plus cher au moins cher</option>
+                <option value="">trier par date de la plus ancienne à la plus récente</option>
+                <option value="">trier par date de plas plus récente à la plus ancienne</option>
+            </select>
 
         <?php foreach ($annonces as $annonce) : ?>
   
-            <div class="card  mb-3" style="max-width: 540px;">     
+            <div class="card  mb-3" >     
               <div class="row no-gutters">
               
                 <div class="col-md-4">
@@ -113,6 +117,6 @@ include __DIR__ . '/assets/includes/header.php';
 
   </div>
 
-
+ 
 <?php
 include __DIR__ . '/assets/includes/footer.php';

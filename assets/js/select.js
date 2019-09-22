@@ -1,18 +1,23 @@
-$(function(){
-    $('#submit').change(function(){
-        event.preventDefault();
-       var id = $(this).val();
 
-       if (id != ''){
 
-        $.get(
-            '/assets/ajax/select.php',
-            'id=' =id,
-            function(response){
-                $('#detail').html(response);
-            });
-       }else{
-        $('#detail').html('');
-       }
+$(document).ready(function(){
+    $('#submit').change(function(event){
+        //event.preventDefault();  
+        ajax();
     });
+
+    function ajax()
+    { 
+        var categorie = $('#categorie').val();
+
+        var parameters = "categorie="+categorie;
+
+        $.post("assets/ajax/select.php", parameters, function(data){
+
+            $('#detail').html(data.resultat);
+            
+        }, 'json');
+    }
+
+
 });
