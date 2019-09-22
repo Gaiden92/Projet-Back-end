@@ -69,17 +69,21 @@ include __DIR__ . '/assets/includes/header.php';
     </div>
 
     <div class="col d-flex justify-content-between">
-        <p>Dâte de publication : <?=$annonce['date_enregistrement'];?></p>
-        <p>avis</p>
-        <p><span style="font-weight: bold;"><?=number_format($annonce['prix'], 2, ',', ' ');?>€</span></p>
-        <p>Adresse : <?=$annonce['adresse'];?></p>
+        <p><i class="far fa-calendar-alt"></i> Dâte de publication : <?=$annonce['date_enregistrement'];?></p>
+        <p><i class="far fa-user"></i> avis</p>
+        <p><i class="fas fa-euro-sign"></i> <?=number_format($annonce['prix'], 2, ',', ' ');?>€</p>
+        <p><i class="fas fa-map-marker-alt"></i> Adresse : <?=$annonce['adresse'];?></p>
     </div>
 
   </div>
 
-  <div class="container localisation"></div>
+  <div class="container localisation">
+    <iframe width="100%" height="350" src="http://maps.google.fr/maps?q=<?=$annonce['adresse'];?>&amp;t=h&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" ></iframe>
+  </div>
 
-  <div class="container autresAnnonces"></div>
+  <div class="container autresAnnonces">
+      <p>Autres annonces</p>
+  </div>
 
 
 
