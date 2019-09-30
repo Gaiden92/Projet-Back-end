@@ -3,13 +3,18 @@ require_once __DIR__ . '/assets/config/configurationprincipale.php';
 
 // fiche_annonce.php?id=  //Recup ID
 if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
-    $resultat = $pdo -> prepare("SELECT a.id_annonce, a.titreA, a.description_courte, a.description_longue, a.prix, a.pays, a.ville, a.cp, a.adresse, a.cp, a.date_enregistrement, m.prenom, c.titre, p.photo1, p.photo2, p.photo3, p.photo4, p.photo5
-    FROM annonce a, membre m, categorie c, photo p
-    WHERE a.id_annonce =:id
-    AND a.categorie_id = c.id_categorie
-    AND a.photo_id = p.id_photo
-   
-");
+    $resultat = $pdo -> prepare(
+        "SELECT 
+            a.*
+            , m.*
+            , p.* 
+            , c.*
+        FROM annonce a
+        LEFT JOIN membre m ON a.membre_id = m.id_membre
+        LEFT JOIN photo p ON a.photo_id = p.id_photo
+        LEFT JOIN categorie c ON a.categorie_id = c.id_categorie       
+            WHERE a.id_annonce =:id");
+
     $resultat -> bindParam(':id', $_GET['id'], PDO::PARAM_INT);
     $resultat -> execute();
     
@@ -25,15 +30,22 @@ if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
 
 // recupérer les suggestions de produit : 
 
-$query = "SELECT a.id_annonce, a.titreA, a.description_courte, a.description_longue, a.prix, a.pays, a.ville, a.cp, a.adresse, a.cp, a.date_enregistrement, m.prenom, c.titre, p.photo1
-FROM annonce a, membre m, categorie c, photo p
-WHERE (a.membre_id = m.id_membre)
-AND (a.categorie_id = c.id_categorie)
-AND (a.photo_id = p.id_photo)
-ORDER BY prix LIMIT 0,4";
+$resultat2 = $pdo -> prepare(
+"SELECT 
+a.*
+, m.*
+, p.* 
+, c.*
+FROM annonce a
+LEFT JOIN membre m ON a.membre_id = m.id_membre
+LEFT JOIN photo p ON a.photo_id = p.id_photo
+LEFT JOIN categorie c ON a.categorie_id = c.id_categorie  
 
-$stmt = $pdo->query($query);
-$suggestions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+ORDER BY prix LIMIT 0,4");
+
+ 
+    $resultat2 -> execute();
+$suggestions = $resultat2->fetchAll(PDO::FETCH_ASSOC);
 extract($suggestions);
 
 $page_title = 'Accueil'; 
@@ -44,6 +56,10 @@ include __DIR__ . '/assets/includes/header.php';
   <?php include __DIR__ . '/assets/includes/flash.php'; ?>
 
   <div class="container-fluid annonce d-flex flex-row flex-wrap">
+    <div class="col-12 p-2 m-2">
+        <a href="index.php" class="text-decoration-none bg-light" style="color:black;">Retour vers les annonces</a>
+    </div>
+
     <div class="photo col-5">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
@@ -85,7 +101,7 @@ include __DIR__ . '/assets/includes/header.php';
 
         <p><i class="far fa-user"></i> avis</p>
         <p><i class="fas fa-euro-sign"></i> <?=number_format($annonce['prix'], 2, ',', ' ');?>€</p>
-        <p><i class="fas fa-map-marker-alt"></i> Adresse : <?=$annonce['adresse'];?></p>
+        <p><i class="fas fa-map-marker-alt"></i> Adresse : <?=htmlspecialchars($annonce['adresse']);?></p>
     </div>
 
   </div>

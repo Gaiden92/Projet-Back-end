@@ -29,9 +29,9 @@
           <li class="nav-item"><a class="nav-link" href="#">qui sommes nous</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
         </ul>
-          <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Recherche</button>
+        <form action="search.php" method="get" class="form-inline">
+          <input type="search" name="recherche" class="form-control mr-sm-2">
+                <input type="submit" value="Rechercher" class="btn btn-outline-info my-2 my-sm-0">
           </form>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item  dropleft ">
