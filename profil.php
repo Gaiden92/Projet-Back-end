@@ -132,7 +132,7 @@ if ($mode == 'save-profil') {
 
 
     <div class="container border mt-4 p-4">
-        <h1>Profil utilisateur : <b><?= $pseudo ?></b></h1>
+        <h2>Profil utilisateur : <b><?= $pseudo ?></b></h2>
 
         <?php if ($mode == 'display-profil') {
             ?>
@@ -183,7 +183,7 @@ if ($mode == 'save-profil') {
     </div>
 
     <div class="container border mt-4 p-4">
-        <h1>Annonces postées en tant que vendeur : <b><?= $pseudo ?></b></h1>
+        <h2>Annonces postées en tant que vendeur : <b><?= $pseudo ?></b></h2>
 
         <?php
         if (count($annonces)>=1) // Vendeur ?
@@ -228,7 +228,7 @@ if ($mode == 'save-profil') {
         }
         ?>
 
-        <h1>Commentaires postées sur annonce : <b><?= $pseudo ?></b></h1>
+        <h2>Commentaires postées sur annonce : <b><?= $pseudo ?></b></h2>
         <?php
         if (count($comments)>=1) // Vendeur ?
         {

@@ -121,7 +121,7 @@ if (isset($_POST['mode'])) {
         </select>
 
         <div id="div_comment" style="display:block;">
-            <h1>Ajouter un commentaire au membre '<?= $membre['prenom']; ?> <?= $membre['nom']; ?>'</h1>
+            <h2>Ajouter un commentaire au membre '<?= $membre['prenom']; ?> <?= $membre['nom']; ?>'</h2>
 
             <form action="commentaire_ajout.php" method="post">
                 <div class="form-group">
@@ -139,7 +139,7 @@ if (isset($_POST['mode'])) {
         </div>
 
         <div id="div_note" style="display:none;">
-            <h1>Ajouter une note au membre '<?= $membre['prenom']; ?> <?= $membre['nom']; ?>'</h1>
+            <h2>Ajouter une note au membre '<?= $membre['prenom']; ?> <?= $membre['nom']; ?>'</h2>
 
             <form action="commentaire_ajout.php" method="post">
                 <div class="form-group">
