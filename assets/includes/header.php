@@ -26,13 +26,13 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active"><a class="nav-link" href="#">Swap <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item"><a class="nav-link" href="#">qui sommes nous</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="quiSommesNous.php">qui sommes nous</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
         </ul>
         <form action="search.php" method="get" class="form-inline">
           <input type="search" name="recherche" class="form-control mr-sm-2">
                 <input type="submit" value="Rechercher" class="btn btn-outline-info my-2 my-sm-0">
-          </form>
+        </form>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item  dropleft ">
               <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Espace Membre</a>

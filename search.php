@@ -32,7 +32,9 @@ $page_title = 'Recherche: ' . $recherche;
 include __DIR__ . '/assets/includes/header.php';
 ?>
 <h1 class="mb-4 text-center">Recherche: <?=htmlspecialchars($recherche); ?></h1>
-
+    <div class="col-12 p-2 m-2">
+        <a href="index.php" class="text-decoration-none bg-light" style="color:black;">Retour vers les annonces</a>
+    </div>
   <div class="container d-flex flex-wrap">
         <div class="col-8 annonces offset-2" id="details">    
             <?php foreach ($resultats as $annonce) : ?>

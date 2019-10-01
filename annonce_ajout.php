@@ -452,6 +452,9 @@ if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
 $page_title = 'annonce'; 
 include __DIR__ . '/assets/includes/header.php';
 ?>
+    <div class="col-12 p-2 m-2">
+        <a href="index.php" class="text-decoration-none bg-light" style="color:black;">Retour vers les annonces</a>
+    </div>
 
     <?php if(isset($_GET['id'])) : ?>
         <h1 class="text-center">Modifier une annonce</h1>

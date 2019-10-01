@@ -56,8 +56,10 @@ include __DIR__ . '/assets/includes/header.php';
   <?php include __DIR__ . '/assets/includes/flash.php'; ?>
 
   <div class="container-fluid annonce d-flex flex-row flex-wrap">
-    <div class="col-12 p-2 m-2">
+    <div class="col-12 p-2 m-2 d-flex justify-content-between">
         <a href="index.php" class="text-decoration-none bg-light" style="color:black;">Retour vers les annonces</a>
+        <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">Contacter <?=$annonce['pseudo'];?>
+        </button>
     </div>
 
     <div class="photo col-5">
@@ -128,7 +130,26 @@ include __DIR__ . '/assets/includes/header.php';
 
   <hr>
 
-
+<!-- Modal contact membre-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
   <?php
