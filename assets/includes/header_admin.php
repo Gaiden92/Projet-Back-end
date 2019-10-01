@@ -29,69 +29,49 @@
       </button>
       <h1 class="navbar-toggler"><a href="index.html">swap</a></h1>
       <div class=" collapse navbar-collapse" id="navbarTogglerDemo01">
-      <ul class="nav bg-dark">
+      <ul class="nav bg-dark" style="height:100vh;">
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="index.php">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
-            </li>
-     
+            </li>   
             <li class="nav-item">
-                <a class="nav-link text-light" href="gestion_annonces.php">gestion des annonces</a>
-            </li>    
-            <li class="nav-item">   
-                <a class="nav-link text-light" href="gestion_categories.php">gestion des catégories</a>
-                </li>    
-            <li class="nav-item">      
-                <a class="nav-link text-light" href="gestion_membres.php">gestion des membres</a>
-                </li>    
-            <li class="nav-item">     
-                <a class="nav-link text-light" href="gestion_commentaires.php">gestion des commentaires</a>
-                </li>    
-            <li class="nav-item">     
-                <a class="nav-link text-light" href="gestion_notes.php">gestion des notes</a>
-            </li>    
-            <li class="nav-item">      
-                <a class="nav-link text-light" href="statistiques.php">Statistiques</a>
-            </li>
-   
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <a class="nav-link collapsed" href="gestion_annonces.php">
                 <i class="fas fa-fw fa-cog"></i>
-                <span>Components</span>
+                <span>gestion des annonces</span>
                 </a>
             </li>
-
-      <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                <i class="fas fa-fw fa-wrench"></i>
-                <span>Utilities</span>
+            <a class="nav-link collapsed" href="gestion_categories.php">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>gestion des catégories</span>
                 </a>
             </li>
-
-      <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>Pages</span>
+            <a class="nav-link collapsed" href="gestion_membres.php">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>gestion des membres</span>
                 </a>
             </li>
-
-      <!-- Nav Item - Charts -->
+               
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Charts</span></a>
+            <a class="nav-link collapsed" href="gestion_notes.php">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>gestion des notes</span>
+                </a>
             </li>
-
-      <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Tables</span></a>
+            <a class="nav-link collapsed" href="gestion_commentaires.php">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>gestion des commentaires</span>
+                </a>
             </li>
-
+            <li class="nav-item">
+            <a class="nav-link collapsed" href="statistiques.php">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Statistiques</span>
+                </a>
+            </li>
             <li class="nav-item">
             <a class="nav-link text-light" href="../">Retour à l'accueil</a>
             </li>
@@ -112,16 +92,16 @@
             </button>
 
             <!-- Topbar Search -->
-            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <form action="search.php" method="get" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
-                <input type="text" class="form-control bg-light border-0 small" placeholder="Rechercher..." aria-label="Recherche" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                    <i class="fas fa-search fa-sm"></i>
-                </button>
-                </div>
+            <form action="search.php" method="get" class="form-inline">
+          <input type="search" name="recherche" class="form-control mr-sm-2">
+                <input type="submit" value="Rechercher" class="btn btn-outline-info my-2 my-sm-0">
+        </form>
             </div>
             </form>
+   
+            
 
             <!-- Topbar Navbar -->
             <ul class="navbar-nav ml-auto">

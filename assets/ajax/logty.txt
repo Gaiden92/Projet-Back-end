@@ -1,0 +1,6 @@
+[30-Sep-2019 10:40:38 Europe/Berlin] PHP Notice:  Undefined variable: offset in C:\xampp\htdocs\Projet-Back-end\assets\ajax\select.php on line 282
+[30-Sep-2019 10:40:38 Europe/Berlin] PHP Warning:  PDOStatement::execute(): SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '5' at line 11 in C:\xampp\htdocs\Projet-Back-end\assets\ajax\select.php on line 284
+[30-Sep-2019 11:27:22 Europe/Berlin] PHP Notice:  Undefined index: offset in C:\xampp\htdocs\Projet-Back-end\assets\ajax\select.php on line 53
+[30-Sep-2019 11:27:23 Europe/Berlin] PHP Notice:  Undefined index: offset in C:\xampp\htdocs\Projet-Back-end\assets\ajax\select.php on line 53
+[30-Sep-2019 11:27:59 Europe/Berlin] PHP Notice:  Undefined index: offset in C:\xampp\htdocs\Projet-Back-end\assets\ajax\select.php on line 53
+[30-Sep-2019 11:28:00 Europe/Berlin] PHP Notice:  Undefined index: offset in C:\xampp\htdocs\Projet-Back-end\assets\ajax\select.php on line 53

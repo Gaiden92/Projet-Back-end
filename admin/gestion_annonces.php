@@ -1,11 +1,16 @@
 <?php
 require_once __DIR__ . '/../assets/config/configurationprincipale.php';
 //affichage de ttes les annonces
-    $query = "SELECT a.id_annonce, a.titreA, a.description_courte, a.description_longue, a.prix, a.pays, a.ville, a.cp, a.adresse, a.cp, a.date_enregistrement, m.prenom, c.titre, p.photo1, p.photo2, p.photo3, p.photo4, p.photo5
-    FROM annonce a, membre m, categorie c, photo p
-    WHERE (a.membre_id = m.id_membre)
-    AND (a.categorie_id = c.id_categorie)
-    AND (a.photo_id = p.id_photo)";
+    $query = 
+    "SELECT 
+      a.* 
+      , m.*
+      , p.*
+      , c.*
+    FROM annonce a
+    LEFT JOIN membre m ON a.membre_id = m.id_membre
+    LEFT JOIN photo p ON a.photo_id = p.id_photo
+    LEFT JOIN categorie c ON a.categorie_id = c.id_categorie";
 
         $stmt = $pdo->query($query);
         $annonce = $stmt->fetchAll();

@@ -1,15 +1,20 @@
 <?php
 require_once __DIR__ . '/assets/config/configurationprincipale.php';
 
-// fiche_categorie.php?id=  //Recup ID
+// fiche_annonce.php?id=  //Recup ID
 if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
-    $resultat = $pdo -> prepare("SELECT a.id_annonce, a.titreA, a.description_courte, a.description_longue, a.prix, a.pays, a.ville, a.cp, a.adresse, a.cp, a.date_enregistrement, m.prenom, c.titre, p.photo1, p.photo2, p.photo3, p.photo4, p.photo5
-    FROM annonce a, membre m, categorie c, photo p
-    WHERE a.id_annonce =:id
-    AND a.categorie_id = c.id_categorie
-    AND a.photo_id = p.id_photo
-   
-");
+    $resultat = $pdo -> prepare(
+        "SELECT 
+            a.*
+            , m.*
+            , p.* 
+            , c.*
+        FROM annonce a
+        LEFT JOIN membre m ON a.membre_id = m.id_membre
+        LEFT JOIN photo p ON a.photo_id = p.id_photo
+        LEFT JOIN categorie c ON a.categorie_id = c.id_categorie       
+            WHERE a.id_annonce =:id");
+
     $resultat -> bindParam(':id', $_GET['id'], PDO::PARAM_INT);
     $resultat -> execute();
     
@@ -25,15 +30,22 @@ if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
 
 // recupérer les suggestions de produit : 
 
-$query = "SELECT a.id_annonce, a.titreA, a.description_courte, a.description_longue, a.prix, a.pays, a.ville, a.cp, a.adresse, a.cp, a.date_enregistrement, m.prenom, c.titre, p.photo1
-FROM annonce a, membre m, categorie c, photo p
-WHERE (a.membre_id = m.id_membre)
-AND (a.categorie_id = c.id_categorie)
-AND (a.photo_id = p.id_photo)
-ORDER BY prix LIMIT 0,4";
+$resultat2 = $pdo -> prepare(
+"SELECT 
+a.*
+, m.*
+, p.* 
+, c.*
+FROM annonce a
+LEFT JOIN membre m ON a.membre_id = m.id_membre
+LEFT JOIN photo p ON a.photo_id = p.id_photo
+LEFT JOIN categorie c ON a.categorie_id = c.id_categorie  
 
-$stmt = $pdo->query($query);
-$suggestions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+ORDER BY prix LIMIT 0,4");
+
+ 
+    $resultat2 -> execute();
+$suggestions = $resultat2->fetchAll(PDO::FETCH_ASSOC);
 extract($suggestions);
 
 $page_title = 'Accueil'; 
@@ -44,6 +56,12 @@ include __DIR__ . '/assets/includes/header.php';
   <?php include __DIR__ . '/assets/includes/flash.php'; ?>
 
   <div class="container-fluid annonce d-flex flex-row flex-wrap">
+    <div class="col-12 p-2 m-2 d-flex justify-content-between">
+        <a href="index.php" class="text-decoration-none " style="color:black;">Retour vers les annonces</a>
+        <button type="button" class="btn" data-toggle="modal" data-target="#contactMembre">Contacter <?=$annonce['pseudo'];?>
+        </button>
+    </div>
+
     <div class="photo col-5">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
@@ -85,7 +103,7 @@ include __DIR__ . '/assets/includes/header.php';
 
         <p><i class="far fa-user"></i> avis </p>
         <p><i class="fas fa-euro-sign"></i> <?=number_format($annonce['prix'], 2, ',', ' ');?>€</p>
-        <p><i class="fas fa-map-marker-alt"></i> Adresse : <?=$annonce['adresse'];?></p>
+        <p><i class="fas fa-map-marker-alt"></i> Adresse : <?=htmlspecialchars($annonce['adresse']);?></p>
     </div>
 
   </div>
@@ -112,7 +130,42 @@ include __DIR__ . '/assets/includes/header.php';
 
   <hr>
 
+<!-- Modal contact membre-->
+<div class="modal fade" id="contactMembre" tabindex="-1" role="dialog" aria-labelledby="contactMembreLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="contactMembreLabel">Contacter <?=$annonce['pseudo'];?></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body m-4 p-4">
+            <form id="contact" method="post" action="traitement_formulaire_contact.php">
+                <fieldset class="text-center"><legend>Vos coordonnées</legend>
+                    <p><label for="pseudo">Pseudo :</label><input type="text" id="pseudo" name="pseudo" value="<?=getMember()['pseudo'] ;?>"/></p>
+                    <p><label for="email">Email :</label><input type="text" id="email" name="email" value="<?=getMember()['email'] ;?>"/></p>
+                </fieldset>
+            
+                <fieldset class="text-center"><legend>Votre message :</legend>
+                    <p><textarea id="message" name="message" cols="50" rows="8"></textarea></p>
+                </fieldset>
+                
+                    <fieldset class="text-center"><legend>Concernant :</legend>
+                    <p><?=$annonce['titreA'];?></p>
+                    <p><img src="assets/img/<?=$annonce['photo1'];?>" class="img-thumbnail"></p>
+                </fieldset>
+            
+                <div style="text-align:center;"><input type="submit" name="envoi" value="Envoyer le formulaire !" /></div>
+            </form>
+        </form>
 
+
+
+
+    </div>
+  </div>
+</div>
 
 
   <?php
