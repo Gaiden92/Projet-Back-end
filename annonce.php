@@ -83,7 +83,7 @@ include __DIR__ . '/assets/includes/header.php';
         <p><i class="far fa-calendar-alt"></i> Dâte de publication : <?= (new DateTime($annonce['date_enregistrement']))->format('d/m/Y'); ?></p>
 
 
-        <p><i class="far fa-user"></i> avis</p>
+        <p><i class="far fa-user"></i> avis </p>
         <p><i class="fas fa-euro-sign"></i> <?=number_format($annonce['prix'], 2, ',', ' ');?>€</p>
         <p><i class="fas fa-map-marker-alt"></i> Adresse : <?=$annonce['adresse'];?></p>
     </div>
@@ -106,7 +106,7 @@ include __DIR__ . '/assets/includes/header.php';
   </div>
   <hr>
   <div class="container-fluid d-flex flex-row justify-content-between">
-      <a href="#" class="text-decoration-none bg-light" style="color:black;">deposer un commentaire ou une note</a>
+      <a href="commentaire_ajout.php?id=<?= $_GET['id'] ?>" class="text-decoration-none bg-light" style="color:black;">D&eacute;poser un commentaire ou une note</a>
      <a href="index.php" class="text-decoration-none bg-light" style="color:black;">Retour vers les annonces</a>
   </div>
 

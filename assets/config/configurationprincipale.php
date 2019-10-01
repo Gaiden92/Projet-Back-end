@@ -1,6 +1,5 @@
 <?php
 
-
 // Paramètres du site
 require_once __DIR__ . '/parametres.php';
 

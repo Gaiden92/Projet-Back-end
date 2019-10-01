@@ -2,7 +2,7 @@
 require_once __DIR__ . '/assets/config/configurationprincipale.php';
 
 
-$result= $bdd->query("SELECT a.id_annonce, a.titreA, a.description_courte, a.description_longue, a.prix, a.pays, a.ville, a.cp, a.adresse, a.cp, a.date_enregistrement, m.prenom, c.titre, p.photo1
+$result= $bdd->query("SELECT a.id_annonce, a.titre, a.description_courte, a.description_longue, a.prix, a.pays, a.ville, a.cp, a.adresse, a.cp, a.date_enregistrement, m.prenom, c.titre, p.photo1
 FROM annonce a, membre m, categorie c, photo p
 WHERE (a.membre_id = m.id_membre)
 AND (a.photo_id = p.id_photo)

@@ -20,7 +20,6 @@ function debug($var){
  */
 function alertMessage(string $type, string $message) : void
 {
-  
     $_SESSION['flash'][] = [
         'type' => $type,
         'message' => $message,
@@ -32,7 +31,7 @@ function alertMessage(string $type, string $message) : void
  * @return array
  */
 
-function recupereralerteMessage() : array
+function recupererAlerteMessages() : array
 {  
     $messages = $_SESSION['flash'] ?? [];    
     unset($_SESSION['flash']);

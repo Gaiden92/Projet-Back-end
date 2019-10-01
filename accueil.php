@@ -18,8 +18,6 @@ include __DIR__ . '/assets/includes/header.php';
                                 <option>Trier par prix (du plus cher au moins cher)</option>
                                 <option>Trier par date (du plus récent au plus ancien)</option>
                                 <option>Trier par date (du plus ancien au plus récent)</option>
-                                
-                                
                             </select>
                         </div>
                 </div>

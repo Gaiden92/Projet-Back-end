@@ -45,7 +45,7 @@ include __DIR__ . '/assets/includes/header.php';
             <select  id="categorie" class="form-control mb-2 col-10">  
               <option value="">Toutes les catégories</option>       
               <?php foreach ($categories as $categorie) : ?>
-                <option value="<?=$categorie['id_categorie']?>"><?= $categorie['titre']?>
+                <option value="<?=$categorie['id_categorie']?>"><?= $categorie['titreA']?>
                 </option>
               <?php endforeach; ?>
             </select>
@@ -53,7 +53,6 @@ include __DIR__ . '/assets/includes/header.php';
             </div>
           </form>
 
-      
           <select  id="region" class="form-control mb-2">
             <option value="">Région</option>
             <?php foreach ($villes as $ville) : ?>

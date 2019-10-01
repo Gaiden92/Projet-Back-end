@@ -39,7 +39,8 @@ if (isset($_POST['modifier'])) {
         //execution de la requête
         $resultat->execute();             
         alertMessage('success', 'La modification a été enregistré');
-        session_commit();                    
+        session_commit();
+        header("location:gestion_commentaires.php");                     
 }
 
 }

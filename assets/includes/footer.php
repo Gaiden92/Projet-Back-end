@@ -42,14 +42,7 @@
         <li class="nav-item">Petites annonces gratuites</li>      
       </ul>
   </div>
-
-
-
 </div>
-
-
-
-
 
     <footer class="pt-4">
       <p class="col text-center">Copyright &copy; Svetlana & Samy</p>
@@ -60,5 +53,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
    
     <script src="assets/js/select.js"></script>
+    <script src="assets/js/note.js"></script>
   </body>
 </html>

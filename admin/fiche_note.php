@@ -37,7 +37,7 @@ if(isset($_POST['modifier'])){
 
     //si la note contient des caractéres spéciaux interdit 
     } elseif(!preg_match('~^[0-5]+$~', $_POST['etoile'])) {
-        alertMessage('danger', 'La note contient des caractères non-autorisés.');
+    alertMessage('danger', 'La note contient des caractères non-autorisés.');
 
     //si la note contient des caractéres spéciaux interdit
     } elseif(!preg_match('~^[0-5]$~', $_POST['etoile'])) {
@@ -130,21 +130,23 @@ include __DIR__ . '/../assets/includes/header_admin.php';
                 <input type="text" disabled value="<?=$note['membre_id2'];?>" class="form-control" name="membre_id2">
             </div>
 
+            
+            
+
             <div class="form-group">
                 <label>Note:</label>
-                <input type="text" value="<?=$note['etoile'];?>" class="form-control" name="etoile">
-            </div>
+                    <select class="etoiles flex-row w-100" name="etoile">
+                        <option type="text" value="1">*</option>
+                        <option type="text" value="2">**</option>
+                        <option type="text" value="3">***</option>
+                        <option type="text" value="4">****</option>
+                        <option type="text" value="5">*****</option>
 
-            <section class="etoiles flex-row w-100">
-                <img src="../assets/images/star.png" id='_1' onclick="valider()" onmouseover="rate(1)" style="height: 30px;width:3Opx" />
-                <img src="../assets/images/star.png" id='_2' onclick="valider()" onmouseover="rate(2)" style="height: 30px;width:3Opx" />
-                <img src="../assets/images/star.png" id='_3' onclick="valider()" onmouseover="rate(3)" style="height: 30px;width:3Opx" />
-                <img src="../assets/images/star.png" id='_4' onclick="valider()" onmouseover="rate(4)" style="height: 30px;width:3Opx" />
-                <img src="../assets/images/star.png" id='_5' onclick="valider()" onmouseover="rate(5)" style="height: 30px;width:3Opx" />
-            </section>
-            <div id="choix">Votre note : 0 étoile(s)</div>
-            
-        
+                        
+                    </select>
+                    
+            </div>
+                
 
             <div class="form-group">
                 <label>Avis:</label>
@@ -161,7 +163,7 @@ include __DIR__ . '/../assets/includes/header_admin.php';
 
 </div>
 
-<!------------suppr l(avis en entier)-------------------------------------->
+<!------------supprimer l'avis en entier-------------------------------------->
 <h2 class="text-center mt-4">Supprimer l'avis</h2>
         <div class="col-md-6 offset-4">
             <form  method="post" action="fiche_note.php?id=<?= $_GET['id'] ?>" enctype="multipart/form-data">
@@ -175,13 +177,6 @@ include __DIR__ . '/../assets/includes/header_admin.php';
             </form>
         </div>
   
-
-
-
-
-
-
-
 
 <?php
 

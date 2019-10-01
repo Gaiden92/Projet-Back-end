@@ -1,4 +1,4 @@
-<?php foreach (recupereralerteMessage() as $message): ?>
+<?php foreach (recupererAlerteMessages() as $message): ?>
     <div class="alert alert-<?= $message['type']; ?>">
         <?= $message['message']; ?>
     </div>
