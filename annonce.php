@@ -57,8 +57,8 @@ include __DIR__ . '/assets/includes/header.php';
 
   <div class="container-fluid annonce d-flex flex-row flex-wrap">
     <div class="col-12 p-2 m-2 d-flex justify-content-between">
-        <a href="index.php" class="text-decoration-none bg-light" style="color:black;">Retour vers les annonces</a>
-        <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">Contacter <?=$annonce['pseudo'];?>
+        <a href="index.php" class="text-decoration-none " style="color:black;">Retour vers les annonces</a>
+        <button type="button" class="btn" data-toggle="modal" data-target="#contactMembre">Contacter <?=$annonce['pseudo'];?>
         </button>
     </div>
 
@@ -131,22 +131,38 @@ include __DIR__ . '/assets/includes/header.php';
   <hr>
 
 <!-- Modal contact membre-->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="contactMembre" tabindex="-1" role="dialog" aria-labelledby="contactMembreLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <div class="modal-header">
+        <h5 class="modal-title" id="contactMembreLabel">Contacter <?=$annonce['pseudo'];?></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+            <span aria-hidden="true">&times;</span>
         </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+        </div>
+        <div class="modal-body m-4 p-4">
+            <form id="contact" method="post" action="traitement_formulaire_contact.php">
+                <fieldset class="text-center"><legend>Vos coordonnées</legend>
+                    <p><label for="pseudo">Pseudo :</label><input type="text" id="pseudo" name="pseudo" value="<?=getMember()['pseudo'] ;?>"/></p>
+                    <p><label for="email">Email :</label><input type="text" id="email" name="email" value="<?=getMember()['email'] ;?>"/></p>
+                </fieldset>
+            
+                <fieldset class="text-center"><legend>Votre message :</legend>
+                    <p><textarea id="message" name="message" cols="50" rows="8"></textarea></p>
+                </fieldset>
+                
+                    <fieldset class="text-center"><legend>Concernant :</legend>
+                    <p><?=$annonce['titreA'];?></p>
+                    <p><img src="assets/img/<?=$annonce['photo1'];?>" class="img-thumbnail"></p>
+                </fieldset>
+            
+                <div style="text-align:center;"><input type="submit" name="envoi" value="Envoyer le formulaire !" /></div>
+            </form>
+        </form>
+
+
+
+
     </div>
   </div>
 </div>
