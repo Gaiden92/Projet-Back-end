@@ -71,7 +71,7 @@ if (isset($_POST['mode'])) {
     }
     $annonce = AnnonceDao::retrieveAnnonceById($pdo, $annonceId);
     $membre = MembreDao::retrieveMembreByAnnonceId($pdo, $annonceId);
-    echo ("5- AFTER ALL : Annonce id:".$annonce['id_annonce']." vs annonceId = " .$annonceId."<br>");
+   
 
 } else {
     $varIdGet = isset($_GET['id']) ? $_GET['id'] : null;
@@ -79,7 +79,7 @@ if (isset($_POST['mode'])) {
         $annonceId = $varIdGet;
         $annonce = AnnonceDao::retrieveAnnonceById($pdo, $annonceId);
         $membre = MembreDao::retrieveMembreByAnnonceId($pdo, $annonceId);
-		echo ("0- AFTER SELECT : Annonce id:".$annonce['id_annonce']." vs annonceId = " .$annonceId."<br>");
+		
     } else {
         redirectToPage("index.php");
     }
@@ -198,10 +198,10 @@ if (isset($membre) && isset($membre["id_membre"])) {
         </div>
     </div>
 
-    <?php echo ("2- AFTER DISPLAY FORM : Annonce id:".$annonceId. "<br>");
+    <?php 
 } else {
     ?>
-    <h3>Problème de redirection. Cette doit s'afficher après avoir cliqué sur une annonce !</h3>
+    <h3>Problème de redirection. Cette page doit s'afficher après avoir cliqué sur une annonce !</h3>
     <?php
 }
 ?>

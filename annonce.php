@@ -124,7 +124,7 @@ include __DIR__ . '/assets/includes/header.php';
   </div>
   <hr>
   <div class="container-fluid d-flex flex-row justify-content-between">
-      <a href="commentaire_ajout.php?id=<?= $_GET['id'] ?>" class="text-decoration-none bg-light" style="color:black;">D&eacute;poser un commentaire ou une note</a>
+      <a href="commentaire_ajout.php?id=<?= $_GET['id'] ?>" class="text-decoration-none bg-light" style="color:black;">Déposer un commentaire ou une note</a>
      <a href="index.php" class="text-decoration-none bg-light" style="color:black;">Retour vers les annonces</a>
   </div>
 

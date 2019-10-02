@@ -4,13 +4,14 @@ class CommentDao {
     public static function saveComment(PDO $pdo, array $comment)
     {
         $req = $pdo->prepare(
-            'insert commentaire (membre_id, motcles) 
-            values (:membre_id, :motcles)'
+            'insert commentaire (membre_id, motcles, annonce_id, date_enregistrement) 
+            values (:membre_id, :motcles, :annonce_id, now())'
         );
 
         $result = $req->execute([
             'membre_id'=>$comment['membre_id'],
-            'motcles'=>$comment['motcles']
+            'annonce_id'=>$comment['annonce_id'],
+			'motcles'=>$comment['motcles']
         ]);
 
         if ($result) {

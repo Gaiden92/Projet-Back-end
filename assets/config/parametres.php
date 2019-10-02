@@ -5,10 +5,10 @@
  */
 
 // Paramètres de connexion MySQL
-const DB_HOST = 'localhost';
-const DB_NAME = 'swap';
-const DB_USER = 'root';
-const DB_PASS = '';
+const DB_HOST = 'sql25';
+const DB_NAME = 'svd36351';
+const DB_USER = 'svd36351';
+const DB_PASS = 'NXBOYstvjr6g';
 
 // Statuts des utilisateurs
 const ROLE_USER = 0;

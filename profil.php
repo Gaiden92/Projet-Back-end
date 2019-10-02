@@ -184,7 +184,7 @@ if ($mode == 'save-profil') {
     </div>
 
     <div class="container border mt-4 p-4">
-        <h2 class="text-center">Annonces postées en tant que vendeur<b><?= $pseudo ?></b></h2>
+        <h2 class="text-center">Annonces postées en tant que vendeur : <b><?= $pseudo ?></b></h2>
 
         <?php
         if (count($annonces)>=1) // Vendeur ?
@@ -224,7 +224,7 @@ if ($mode == 'save-profil') {
         <?php
         }else {
             ?>
-            <h2 class="text-center">Rien à afficher</h2>
+            <h4 class="text-center">Vous n'avez posté aucune annonce</h4>
        <?php
         }
         ?>

@@ -48,7 +48,9 @@ include __DIR__ . '/../assets/includes/header_admin.php';
                 <td><?=$ligne['description_longue']; ?></td>
                 <td><?=number_format($ligne['prix'], 2, ',', ' ');?>€</td>
 
-                <td><img src="../assets/img/<?= $ligne['photo1']; ?>" class="img-thumbnail"></td>
+                <td><img src="../assets/img/<?= $ligne['photo1']; ?>" class="img-thumbnail"><a target="_blank" href="../assets/img/<?= $ligne['photo1']; ?>">Voir plus</a>
+  
+</button></td>
 
                 <td><?=$ligne['pays']; ?></td>
                 <td><?=$ligne['ville']; ?></td>
@@ -70,7 +72,6 @@ include __DIR__ . '/../assets/includes/header_admin.php';
 
 
 
-  
 
 
 
