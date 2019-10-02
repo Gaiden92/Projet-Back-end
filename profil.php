@@ -132,41 +132,42 @@ if ($mode == 'save-profil') {
 
 
     <div class="container border mt-4 p-4">
-        <h2>Profil utilisateur : <b><?= $pseudo ?></b></h2>
+        <h2 class="text-center">Bonjour : <b><?= $pseudo ?></b></h2>
+        <hr>
 
         <?php if ($mode == 'display-profil') {
             ?>
-            <div class="form-group">
-                <label>Pseudo</label>
+            <div class="form-group text-center">
+                <label>Votre pseudo</label>
                 <span class="form-control"><?= $profil['pseudo'] ?? ''; ?></span>
             </div>
 
-            <div class="form-group">
-                <label>Mot de passe</label>
+            <div class="form-group text-center">
+                <label>Votre mot de passe</label>
                 <span class="form-control"><?= replaceAllCharByStar($profil['mdp']) ?? ''; ?></span>
             </div>
 
-            <div class="form-group">
-                <label>Nom</label>
+            <div class="form-group text-center">
+                <label>Votre nom</label>
                 <span class="form-control"><?= $profil['nom'] ?? ''; ?></span>
             </div>
 
-            <div class="form-group">
-                <label>Prénom</label>
+            <div class="form-group text-center">
+                <label>Votre prénom</label>
                 <span class="form-control"><?= $profil['prenom'] ?? ''; ?></span>
             </div>
 
-            <div class="form-group">
-                <label>Email</label>
+            <div class="form-group text-center">
+                <label>Votre email</label>
                 <span class="form-control"><?= $profil['email'] ?? ''; ?></span>
             </div>
 
-            <div class="form-group">
-                <label>Téléphone</label>
+            <div class="form-group text-center">
+                <label>Votre téléphone</label>
                 <span class="form-control"><?= $profil['telephone'] ?? ''; ?></span>
             </div>
 
-            <div class="form-group">
+            <div class="form-group text-center">
                 <label>Votre sexe</label>
                 <span class="form-control"><?php $profil['civilite']=='m' ? print('Masculin') : print('Féminin'); ?></span>
             </div>
@@ -183,7 +184,7 @@ if ($mode == 'save-profil') {
     </div>
 
     <div class="container border mt-4 p-4">
-        <h2>Annonces postées en tant que vendeur : <b><?= $pseudo ?></b></h2>
+        <h2 class="text-center">Annonces postées en tant que vendeur<b><?= $pseudo ?></b></h2>
 
         <?php
         if (count($annonces)>=1) // Vendeur ?
@@ -210,7 +211,7 @@ if ($mode == 'save-profil') {
                             "<th>".$annonce['id_annonce']."</th>".
                             "<th>".$annonce['titreA']."</th>".
                             "<th>".$annonce['description_courte']."</th>".
-                            "<th>".$annonce['prix']."</th>".
+                            "<th>".$annonce['prix']." €</th>".
                             "<th>".$annonce['adresse']." - ".$annonce['cp']." ".$annonce['ville']."</th>".
                             "<th>".$annonce['pays']."</th>".
                             "<th>".$annonce['date_enregistrement']."</th>".
@@ -223,12 +224,12 @@ if ($mode == 'save-profil') {
         <?php
         }else {
             ?>
-            <h2>Rien à afficher</h2>
+            <h2 class="text-center">Rien à afficher</h2>
        <?php
         }
         ?>
-
-        <h2>Commentaires postées sur annonce : <b><?= $pseudo ?></b></h2>
+        <br>
+        <h2 class="text-center">Commentaires postées sur annonce : <b><?= $pseudo ?></b></h2>
         <?php
         if (count($comments)>=1) // Vendeur ?
         {
@@ -254,10 +255,11 @@ if ($mode == 'save-profil') {
                 ?>
                 </tbody>
             </table>
+            
             <?php
         }else {
             ?>
-            <h2>Rien à afficher</h2>
+            <h4 class="text-center">Il n'y a aucun commentaires à afficher</h4>
             <?php
         }
         ?>
