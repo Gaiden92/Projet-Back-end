@@ -93,12 +93,12 @@ include __DIR__ . '/assets/includes/header.php';
     </div>
 
     <div class="col-7">
-        <h5>Descritpion :</h5>
+        <h5>Description :</h5>
         <p class="card-text" style="text-align: justify;"><?= nl2br(htmlspecialchars($annonce['description_longue']))?></p>              
     </div>
-
+<br>
     <div class="col d-flex justify-content-between">
-        <p><i class="far fa-calendar-alt"></i> Dâte de publication : <?= (new DateTime($annonce['date_enregistrement']))->format('d/m/Y'); ?></p>
+        <p><i class="far fa-calendar-alt"></i> Date de publication : <?= (new DateTime($annonce['date_enregistrement']))->format('d/m/Y'); ?></p>
 
 
         <p><i class="far fa-user"></i> avis </p>
